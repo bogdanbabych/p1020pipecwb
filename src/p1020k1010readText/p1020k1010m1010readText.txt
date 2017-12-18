@@ -1,0 +1,16 @@
+documentation for the project file
+
+2017/12/18
+
+the purpose 
+    read files for processing in cwb
+    
+    working with Ukrainian military texts
+    
+    tmx files
+    and
+    alignment -- for tmx
+    
+    the stages: into tmx; from tmx
+    
+    
