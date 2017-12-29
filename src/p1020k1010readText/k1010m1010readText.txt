@@ -13,4 +13,8 @@ the purpose
     
     the stages: into tmx; from tmx
     
-    
+2017/12/27
+the philosophy, scope and the conext of the project.
+
+[philosophy]
+    - developing a pipeline for processing corpora  
