@@ -18,3 +18,22 @@ the philosophy, scope and the conext of the project.
 
 [philosophy]
     - developing a pipeline for processing corpora  
+    - moving to Python and linking relevant libraries, etc.
+    
+2017/01/04
+[stages of the development]
+    1. data preparation
+    - identifying sources of data: parallel texts
+    - re-creating pipeline for tmx 2 cwb
+    
+    - creating a pipeline 
+    
+    
+[further tasks]
+    1. neural MT training from small datasets
+    - experiments: linking with data annotation
+    
+    2. terminological extensions to the interface
+    
+    
+    
