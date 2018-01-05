@@ -63,7 +63,7 @@ if __name__ == '__main__':
 	running script if the module is called from the main
 	'''
 	STmxIn = pathlib.Path(sys.argv[1]).read_text()
-	OGenerateOutputFileNames = clGenerateOutputFileNames(sys.argv[1], ['uk-UA', 'en-GB'])
+	OGenerateOutputFileNames = clGenerateOutputFileNames(sys.argv[1], ['uk-UA', 'en-GB'], 1)
 	OReadTMX = clReadTMX(STmxIn)
 	
 	pass
