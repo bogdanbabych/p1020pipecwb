@@ -24,7 +24,7 @@ class clReadTMX(object):
 	def getFileOut(self, SInputFileName = './clReadTMX-input.txt'):
 		SHead, Tail = os.path.split(SInputFileName)
 		SRoot, SExtension = os.path.splitext(Tail)
-		print ("%(SHead)s %(Tail)s %(SRoot)s %(SExtension)s\n")
+		print ("%(SHead)s %(Tail)s %(SRoot)s %(SExtension)s\n" % locals())
 		return
 	
 	def tmx2tree(self, STmxIn):
