@@ -66,7 +66,7 @@ class clReadTMX(object):
 			print(tuv.attrib)
 		'''
 			
-		LTuv = [ tuv.attrib for tuv in root.iter('tuv')]
+		LTuv = [ tuv.attrib.items() for tuv in root.iter('tuv')]
 		# SetTuv = set(LTuv)
 		print(str(LTuv))
 		# print(str(SetTuv))
