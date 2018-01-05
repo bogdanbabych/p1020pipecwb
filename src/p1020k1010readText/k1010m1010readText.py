@@ -43,6 +43,7 @@ class clReadTMX(object):
         
 
 if __name__ == '__main__':
+    # STmxIn = clFile2Str(sys.argv[1]).getData()
     STmxIn = pathlib.Path(sys.argv[1]).read_text()
     OReadTMX = clReadTMX(STmxIn)
     pass
