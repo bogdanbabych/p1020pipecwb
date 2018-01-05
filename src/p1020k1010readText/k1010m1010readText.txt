@@ -47,8 +47,19 @@ the philosophy, scope and the conext of the project.
         
         
         
-    2. this 
-    3. that
+    2. tmx2giza ; giza2tmx toolkit --> start of PyParaCorpus project
+    3. tmx2tseg ; tseg2tmx toolkit --> input for TreeTagger / other tagsets
+    
+    
+ [steps]
+ 	giza and tseg formats implementation
+ 	1. implementing return of language list 
+ 	2. impl: aligned segments data structure ? <internal ?
+ 		> to be able to:
+ 		> generate tseg and giza format in a straightforward way
+ 		
+    
+    
     
     
     
@@ -80,6 +91,66 @@ the philosophy, scope and the conext of the project.
     // use list comprehension and other compact forms rather than cycles etc. where possible to define sets
 	> using declarative format where possible which has procedural interpretation...
 	
-	
-    
-    
+	// separation of string generation and string printing to file
+		>> engineering reason :: input processing will contain suffixes of languages in TMX file -- which will be used as output file name suffixes
+		>> processing and generation of the string input/output can happen simultaneously with finding out what are the languages in tmx files.
+		
+ 
+
+
+[documentation]
+
+# list comprehension documentation:
+http://www.secnetix.de/olli/Python/list_comprehensions.hawk   
+'''
+	Python: List Comprehensions
+Note: Lines beginning with ">>>" and "..." indicate input to Python (these are the default prompts of the interactive interpreter). Everything else is output from Python.
+Python supports a concept called "list comprehensions". It can be used to construct lists in a very natural, easy way, like a mathematician is used to do.
+
+The following are common ways to describe lists (or sets, or tuples, or vectors) in mathematics.
+
+S = {x² : x in {0 ... 9}}
+V = (1, 2, 4, 8, ..., 2¹²)
+M = {x | x in S and x even}
+You probably know things like the above from mathematics lessons at school. In Python, you can write these expression almost exactly like a mathematician would do, without having to remember any special cryptic syntax.
+
+This is how you do the above in Python:
+
+>>> S = [x**2 for x in range(10)]
+>>> V = [2**i for i in range(13)]
+>>> M = [x for x in S if x % 2 == 0]
+>>> 
+>>> print S; print V; print M
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+[1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096]
+[0, 4, 16, 36, 64]
+I'm sure you want to see a more complicated example. :-) The following is yet another way to compute prime numbers. The interesting thing is that we first build a list of non-prime numbers, using a single list comprehension, then use another list comprehension to get the "inverse" of the list, which are prime numbers.
+
+>>> noprimes = [j for i in range(2, 8) for j in range(i*2, 50, i)]
+>>> primes = [x for x in range(2, 50) if x not in noprimes]
+>>> print primes
+[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
+
+'''
+
+https://stackoverflow.com/questions/9138112/looping-over-a-list-in-python
+Try this,
+
+x in mylist is better and more readable than x in mylist[:] and your len(x) should be equal to 3.
+
+>>> mylist = [[1,2,3],[4,5,6,7],[8,9,10]]
+>>> for x in mylist:
+...      if len(x)==3:
+...        print x
+...
+[1, 2, 3]
+[8, 9, 10]
+or if you need more pythonic use list-comprehensions
+
+>>> [x for x in mylist if len(x)==3]
+[[1, 2, 3], [8, 9, 10]]
+>>>
+
+
+
+

@@ -65,14 +65,20 @@ class clReadTMX(object):
 		for tuv in root.iter('tuv'):
 			print(tuv.attrib)
 		'''
-			
-		LTuv = [ (key, val) for tuv in root.iter('tuv') for (key, val) in tuv.attrib.items() ]
 		
+		'''
+		list comprehension: forming a list of key-value pairs with langauge IDs (for naming files / aligned indices)
+		how it works : it is computed left to right; (key, val) become element of the list; root.iter('tuv') iterates over tuv tags that have lang id, 
+		tuv.attrib.items() converts attribute=value dictionary into a tuple (key, value) in each of the cases where 'tuv' tag is processed
+		list comprehensions are best explained in: http://www.secnetix.de/olli/Python/list_comprehensions.hawk & https://stackoverflow.com/questions/9138112/looping-over-a-list-in-python
+		'''
+		LTuv = [ (key, val) for tuv in root.iter('tuv') for (key, val) in tuv.attrib.items() ]
 		# LTuv = [ tuv.attrib.items() for tuv in root.iter('tuv')]
+		
 		SetTuv = set(LTuv)
-		print(str(SetTuv))
-		# print(str(LTuv))
-			
+		LTuvUniq = list(SetTuv)
+		print(str(LTuvUniq))
+		
 		
 		
 		return
