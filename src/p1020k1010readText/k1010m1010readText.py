@@ -58,6 +58,9 @@ class clReadTMX(object):
 		root = ET.fromstring(STmxIn)
 		print(root.tag)
 		print(root.attrib)
+		for child in root:
+			print(child.tag, child.attrib)
+			
 		return
 
 
