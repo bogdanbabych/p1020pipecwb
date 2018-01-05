@@ -20,6 +20,17 @@ the philosophy, scope and the conext of the project.
     - developing a pipeline for processing corpora  
     - moving to Python and linking relevant libraries, etc.
     
+    - creating a GitHub library for processing parallel copora
+    		> link to CWB and python frontend
+    		> open-source repository
+    		> finished products
+    		
+    		>> separating development workspace from product workspace & release space
+    		title of the project
+    		PyCorpus
+    		PyCorpus-Parallel
+    			>> for researchers in translation corpus linguistics
+    
 2017/01/04
 [stages of the development]
     1. data preparation
@@ -64,5 +75,11 @@ the philosophy, scope and the conext of the project.
     
     // output file name is created from input file name using naming conventions for the project, but not given in a shell script
     // the format of shell scripts needs to be kept simple; the code should be reusable without these scripts. 
+    
+    //defailt values normally in __init__ function >> again, to capture errors on the development stage, not hide them under the carpet
+    // use list comprehension and other compact forms rather than cycles etc. where possible to define sets
+	> using declarative format where possible which has procedural interpretation...
+	
+	
     
     
