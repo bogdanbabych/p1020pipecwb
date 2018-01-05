@@ -58,5 +58,8 @@ the philosophy, scope and the conext of the project.
     Reading the whole file to the string / converting
     Processing the string as a separate class
     
+    a point on philosophy of the development:
+    // handling exceptions, such as no file as errors rather than warnings... --> we need to understand that the programme failed rather than discover this
+    from wrong output == it may be too late then to see wrong behavious
     
     
