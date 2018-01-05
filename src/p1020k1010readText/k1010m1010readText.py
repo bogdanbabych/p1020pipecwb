@@ -33,13 +33,17 @@ class clReadTMX(object):
     '''
 
 
-    def __init__(self):
+    def __init__(self, STmxIn):
         '''
         Constructor
         '''
         
+        print(STmxIn)
+        
 
 if __name__ == '__main__':
     OFile2Str = clFile2Str(sys.argv[1])
-    OFile2Str.printData()
+    STmxIn = OFile2Str.getData()
+    OReadTMX = clReadTMX(STmxIn)
+    pass
     
