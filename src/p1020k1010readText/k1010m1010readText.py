@@ -60,7 +60,11 @@ class clReadTMX(object):
 		print(root.attrib)
 		for child in root:
 			print(child.tag, child.attrib)
-			
+		
+		for tuv in root.iter('tuv'):
+			print(tuv.attrib)
+		
+		
 		return
 
 
