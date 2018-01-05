@@ -14,23 +14,23 @@ class clGenerateOutputFileNames(object):
 	generates output file names, similar to pathlib function for input file names
 	'''
 
-	def __init__(self, SFNameTemplate = './clReadTMXInput.txt', LSuffixes=['out']):
+	def __init__(self, SFNameTemplate = './clReadTMXInput.txt', LSuffixes=[''], IStageNumber = 0):
 		self.LFileNamesOut = []
-		self.genFileNamesOut(SFNameTemplate, LSuffixes) # modifies self.LFileNamesOut
+		self.genFileNamesOut(SFNameTemplate, LSuffixes, IStageNumber) # modifies self.LFileNamesOut
 		return
 	
 	def getData(self):
 		return self.LFileNamesOut
 	
 
-	def genFileNamesOut(self, SFNameTemplate, LSuffixes):
+	def genFileNamesOut(self, SFNameTemplate, LSuffixes, IStageNumber):
 		'''
 		using SFNameTemplate (normally - input file name) as a template for generating a list of output file names
 		'''
 		SHead, Tail = os.path.split(SFNameTemplate) # splitting directory name from file+extension name
 		SRoot, SExtension = os.path.splitext(Tail) # splitting extension from the Tail (file+extension)
 		
-		self.LFileNamesOut = [ SRoot + '-' + SSuffix + 's01' + SExtension for SSuffix in LSuffixes ]
+		self.LFileNamesOut = [ SRoot + '-' + SSuffix + str(100 + IStageNumber) + SExtension for SSuffix in LSuffixes ]
 		SLFileNamesOut = str(self.LFileNamesOut)
 		# SRootOut = SRoot + 's01' + SExtension
 		# SFileNameOut = os.path.join(SHead, SRootOut)
@@ -49,7 +49,7 @@ class clReadTMX(object):
 		'''
 		Constructor
 		'''
-		print("output from clReadTmx\n", STmxIn)
+		# print("output from clReadTmx\n", STmxIn)
 		return
 	
 	
