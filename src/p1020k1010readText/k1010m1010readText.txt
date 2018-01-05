@@ -62,4 +62,7 @@ the philosophy, scope and the conext of the project.
     // handling exceptions, such as no file as errors rather than warnings... --> we need to understand that the programme failed rather than discover this
     from wrong output == it may be too late then to see wrong behavious
     
+    // output file name is created from input file name using naming conventions for the project, but not given in a shell script
+    // the format of shell scripts needs to be kept simple; the code should be reusable without these scripts. 
+    
     
