@@ -46,6 +46,7 @@ class clGenerateOutputFileNames(object):
 		for key, val in LTuvUniq:
 			id +=1; sID = str(10 + id)
 			LSuffixes.append(sID + '-' + val)
+		return LSuffixes
 
 		
 
@@ -110,10 +111,10 @@ if __name__ == '__main__':
 	# initialise the FileName generator object
 	OGenerateOutputFileNames = clGenerateOutputFileNames()
 	# generate list of LangIDs from attribute / value pairs
-	LLangIDs = OGenerateOutputFileNames.genLangIDSuffixes(LLangAttr)
+	LSuffixes = OGenerateOutputFileNames.genLangIDSuffixes(LLangAttr)
 	# generate OutputFilenames given the list of lang ids and system argv[1] :: TODO :: to change -- pair : lang ID + file name! to know which language to write where!
 	# LFileNameOutNLangID = OGenerateOutputFileNames.genFileNamesOut(SFNameTemplate, LSuffixes, IStageNumber)
-	LFileNameOutNLangID = OGenerateOutputFileNames.genFileNamesOut(sys.argv[1], LLangIDs, 1)
+	LFileNameOutNLangID = OGenerateOutputFileNames.genFileNamesOut(sys.argv[1], LSuffixes, 1)
 	
 	# OGenerateOutputFileNames = clGenerateOutputFileNames(sys.argv[1], ['uk-UA', 'en-GB'], 1)
 	# OGenerateOutputFileNames = clGenerateOutputFileNames(sys.argv[1], LLangIDs, 1)
