@@ -35,7 +35,7 @@ class clGenerateOutputFileNames(object):
 		# SRootOut = SRoot + 's01' + SExtension
 		# SFileNameOut = os.path.join(SHead, SRootOut)
 		
-		print ("%(SHead)s %(Tail)s %(SRoot)s %(SExtension)s %(SFileNameOut)s\n" % locals())
+		print ("%(SHead)s %(Tail)s %(SRoot)s %(SExtension)s %(SLFileNamesOut)s\n" % locals())
 		print ("%(SLFileNamesOut)s" % locals())
 		return
 		
