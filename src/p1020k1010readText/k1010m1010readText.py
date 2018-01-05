@@ -37,7 +37,7 @@ class clGenerateOutputFileNames(object):
 		
 		# print ("%(SHead)s %(Tail)s %(SRoot)s %(SExtension)s\n" % locals())
 		print ("%(SLFileNamesOut)s" % locals())
-		return LFileNamesOut # to change :: pair with langID -- to know which language where to write...
+		return self.LFileNamesOut # to change :: pair with langID -- to know which language where to write...
 	
 	def genLangIDSuffixes(self, LTuvUniq):
 		# key-value pairs (attribute=val) are unique, but langIDs are not guaranteed to be unique; so we generate numeric IDs automatically, since keys cannot be in file names (contain / :, etc.)
