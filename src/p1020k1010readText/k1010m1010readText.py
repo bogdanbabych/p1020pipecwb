@@ -35,7 +35,7 @@ class clGenerateOutputFileNames(object):
 		# SRootOut = SRoot + 's01' + SExtension
 		# SFileNameOut = os.path.join(SHead, SRootOut)
 		
-		print ("%(SHead)s %(Tail)s %(SRoot)s %(SExtension)s %(SLFileNamesOut)s\n" % locals())
+		# print ("%(SHead)s %(Tail)s %(SRoot)s %(SExtension)s\n" % locals())
 		print ("%(SLFileNamesOut)s" % locals())
 		return
 		
@@ -50,11 +50,14 @@ class clReadTMX(object):
 		Constructor
 		'''
 		# print("output from clReadTmx\n", STmxIn)
+		self.tmx2tree(STmxIn)
 		return
 	
 	
 	def tmx2tree(self, STmxIn):
 		root = ET.fromstring(STmxIn)
+		print(root.tag)
+		print(root.attrib)
 		return
 
 
