@@ -29,11 +29,34 @@ the philosophy, scope and the conext of the project.
     - creating a pipeline 
     
     
+[tasks]
+    1. a pipeline: tmx --> giza format (1 segment per line)
+        - reading xml in a proper way
+        - portable for tbx format, etc.
+        
+        
+        
+    2. this 
+    3. that
+    
+    
+    
 [further tasks]
     1. neural MT training from small datasets
-    - experiments: linking with data annotation
+        - experiments: linking with data annotation
     
     2. terminological extensions to the interface
+        - integrating term annotation ; 
+        - moving beyond what has been achieved
+        - designing interactive activities for students and participants of the workshops
+        - implementing / developing business models...
+        
+    
+    3. deep learning frameworks
+    
+[development details]
+    Reading the whole file to the string / converting
+    Processing the string as a separate class
     
     
     
