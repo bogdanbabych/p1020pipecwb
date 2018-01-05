@@ -11,13 +11,14 @@ import pathlib
 class clFile2Str(object):
     '''
     this class converts a file into a string for a more systematic processing 
+    printing warning that no file was found 
     '''
     def __init__(self, SFileIn=sys.argv[1]):
         self.SContent = ''
         try:
             self.SContent = pathlib.Path(SFileIn).read_text()
         except:
-            pass
+            print("WARNING: file not found!!!")
         
     def getData(self):
         return self.SContent
@@ -42,8 +43,7 @@ class clReadTMX(object):
         
 
 if __name__ == '__main__':
-    OFile2Str = clFile2Str(sys.argv[1])
-    STmxIn = OFile2Str.getData()
+    STmxIn = clFile2Str(sys.argv[1]).getData()
     OReadTMX = clReadTMX(STmxIn)
     pass
     
