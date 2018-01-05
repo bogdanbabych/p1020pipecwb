@@ -21,6 +21,15 @@ class clGenerateOutputFileNames(object):
 	
 	def getData(self):
 		return self.LFileNamesOut
+
+	def genLangIDSuffixes(self, LTuvUniq):
+		# key-value pairs (attribute=val) are unique, but langIDs are not guaranteed to be unique; so we generate numeric IDs automatically, since keys cannot be in file names (contain / :, etc.)
+		i = 0
+		LSuffixes = []
+		for key, val in LTuvUniq:
+			i +=1; sID = str(10 + i)
+			LSuffixes.append(sID + '-' + val)
+		return LSuffixes
 	
 
 	def genFileNamesOut(self, SFNameTemplate = './clReadTMXInput.txt', LSuffixes=[''], IStageNumber = 0):
@@ -30,7 +39,7 @@ class clGenerateOutputFileNames(object):
 		SHead, Tail = os.path.split(SFNameTemplate) # splitting directory name from file+extension name
 		SRoot, SExtension = os.path.splitext(Tail) # splitting extension from the Tail (file+extension)
 		
-		self.LFileNamesOut = [ SRoot + '-' + SSuffix + str(100 + IStageNumber) + SExtension for SSuffix in LSuffixes ]
+		self.LFileNamesOut = [ SRoot + '-' + SSuffix + '-' + str(100 + IStageNumber) + SExtension for SSuffix in LSuffixes ]
 		SLFileNamesOut = str(self.LFileNamesOut)
 		# SRootOut = SRoot + 's01' + SExtension
 		# SFileNameOut = os.path.join(SHead, SRootOut)
@@ -39,14 +48,6 @@ class clGenerateOutputFileNames(object):
 		print ("%(SLFileNamesOut)s" % locals())
 		return self.LFileNamesOut # to change :: pair with langID -- to know which language where to write...
 	
-	def genLangIDSuffixes(self, LTuvUniq):
-		# key-value pairs (attribute=val) are unique, but langIDs are not guaranteed to be unique; so we generate numeric IDs automatically, since keys cannot be in file names (contain / :, etc.)
-		id = 0
-		LSuffixes = []
-		for key, val in LTuvUniq:
-			id +=1; sID = str(10 + id)
-			LSuffixes.append(sID + '-' + val)
-		return LSuffixes
 
 		
 
