@@ -14,16 +14,16 @@ class clGenerateOutputFileNames(object):
 	generates output file names, similar to pathlib function for input file names
 	'''
 
-	def __init__(self, SFNameTemplate = './clReadTMXInput.txt', LSuffixes=[''], IStageNumber = 0):
+	def __init__(self):
 		self.LFileNamesOut = []
-		self.genFileNamesOut(SFNameTemplate, LSuffixes, IStageNumber) # modifies self.LFileNamesOut
+		# self.genFileNamesOut(SFNameTemplate, LSuffixes, IStageNumber) # modifies self.LFileNamesOut
 		return
 	
 	def getData(self):
 		return self.LFileNamesOut
 	
 
-	def genFileNamesOut(self, SFNameTemplate, LSuffixes, IStageNumber):
+	def genFileNamesOut(self, SFNameTemplate = './clReadTMXInput.txt', LSuffixes=[''], IStageNumber = 0):
 		'''
 		using SFNameTemplate (normally - input file name) as a template for generating a list of output file names
 		'''
@@ -37,7 +37,7 @@ class clGenerateOutputFileNames(object):
 		
 		# print ("%(SHead)s %(Tail)s %(SRoot)s %(SExtension)s\n" % locals())
 		print ("%(SLFileNamesOut)s" % locals())
-		return
+		return LFileNamesOut # to change :: pair with langID -- to know which language where to write...
 	
 	def genLangIDSuffixes(self, LTuvUniq):
 		# key-value pairs (attribute=val) are unique, but langIDs are not guaranteed to be unique; so we generate numeric IDs automatically, since keys cannot be in file names (contain / :, etc.)
@@ -105,12 +105,18 @@ if __name__ == '__main__':
 	'''
 	STmxIn = pathlib.Path(sys.argv[1]).read_text()
 	OReadTMX = clReadTMX(STmxIn)
-	LLangAttr = OReadTMX.findLangIDs(OReadTMX.root)
-	LLangIDs = clGenerateOutputFileNames.genLangIDSuffixes(LLangAttr)
+	LLangAttr = OReadTMX.findLangIDs(OReadTMX.root) # attribute / value pairs in a list for all languages
 	
+	# initialise the FileName generator object
+	OGenerateOutputFileNames = clGenerateOutputFileNames()
+	# generate list of LangIDs from attribute / value pairs
+	LLangIDs = OGenerateOutputFileNames.genLangIDSuffixes(LLangAttr)
+	# generate OutputFilenames given the list of lang ids and system argv[1] :: TODO :: to change -- pair : lang ID + file name! to know which language to write where!
+	# LFileNameOutNLangID = OGenerateOutputFileNames.genFileNamesOut(SFNameTemplate, LSuffixes, IStageNumber)
+	LFileNameOutNLangID = OGenerateOutputFileNames.genFileNamesOut(sys.argv[1], LLangIDs, 1)
 	
 	# OGenerateOutputFileNames = clGenerateOutputFileNames(sys.argv[1], ['uk-UA', 'en-GB'], 1)
-	OGenerateOutputFileNames = clGenerateOutputFileNames(sys.argv[1], LLangIDs, 1)
+	# OGenerateOutputFileNames = clGenerateOutputFileNames(sys.argv[1], LLangIDs, 1)
 	
 	
 	pass
