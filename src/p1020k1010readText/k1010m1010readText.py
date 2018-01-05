@@ -38,6 +38,15 @@ class clGenerateOutputFileNames(object):
 		# print ("%(SHead)s %(Tail)s %(SRoot)s %(SExtension)s\n" % locals())
 		print ("%(SLFileNamesOut)s" % locals())
 		return
+	
+	def genLangIDSuffixes(self, LTuvUniq):
+		# key-value pairs (attribute=val) are unique, but langIDs are not guaranteed to be unique; so we generate numeric IDs automatically, since keys cannot be in file names (contain / :, etc.)
+		id = 0
+		LSuffixes = []
+		for key, val in LTuvUniq:
+			id +=1; sID = str(10 + id)
+			LSuffixes.append(sID + '-' + val)
+
 		
 
 class clReadTMX(object):
@@ -50,23 +59,30 @@ class clReadTMX(object):
 		Constructor
 		'''
 		# print("output from clReadTmx\n", STmxIn)
-		self.tmx2tree(STmxIn)
+		self.root = self.tmx2tree(STmxIn)
 		return
-	
-	
+				
 	def tmx2tree(self, STmxIn):
 		root = ET.fromstring(STmxIn)
+		
+		'''
+		# experiments with the root object:
+		
 		print(root.tag)
 		print(root.attrib)
 		for child in root:
 			print(child.tag, child.attrib)
 		
-		'''
 		for tuv in root.iter('tuv'):
 			print(tuv.attrib)
 		'''
 		
+		return root
+	
+	def findLangIDs(self, root):
+		LTuvUniq = []
 		'''
+		finding language identifiers in the file
 		list comprehension: forming a list of key-value pairs with langauge IDs (for naming files / aligned indices)
 		how it works : it is computed left to right; (key, val) become element of the list; root.iter('tuv') iterates over tuv tags that have lang id, 
 		tuv.attrib.items() converts attribute=value dictionary into a tuple (key, value) in each of the cases where 'tuv' tag is processed
@@ -78,10 +94,9 @@ class clReadTMX(object):
 		SetTuv = set(LTuv)
 		LTuvUniq = list(SetTuv)
 		print(str(LTuvUniq))
+
 		
-		
-		
-		return
+		return LTuvUniq
 
 
 if __name__ == '__main__':
@@ -89,8 +104,14 @@ if __name__ == '__main__':
 	running script if the module is called from the main
 	'''
 	STmxIn = pathlib.Path(sys.argv[1]).read_text()
-	OGenerateOutputFileNames = clGenerateOutputFileNames(sys.argv[1], ['uk-UA', 'en-GB'], 1)
 	OReadTMX = clReadTMX(STmxIn)
+	LLangAttr = OReadTMX.findLangIDs(OReadTMX.root)
+	LLangIDs = clGenerateOutputFileNames.genLangIDSuffixes(LLangAttr)
+	
+	
+	# OGenerateOutputFileNames = clGenerateOutputFileNames(sys.argv[1], ['uk-UA', 'en-GB'], 1)
+	OGenerateOutputFileNames = clGenerateOutputFileNames(sys.argv[1], LLangIDs, 1)
+	
 	
 	pass
 
