@@ -22,7 +22,9 @@ class clGenerateOutput(object):
 
 	
 	def printSegs(self, SFNTemplate, LDSDataSegs, LSTypesOut):
+		ICountSegs = 1000000
 		for DSSeg in LDSDataSegs:
+			ICountSegs +=1
 			for SLangID, SSeg in sorted(DSSeg.items()):
 				for STypeOut in LSTypesOut:
 					SFNameOut = SFNTemplate + '-' + SLangID + '-' + STypeOut
@@ -33,9 +35,9 @@ class clGenerateOutput(object):
 						if re.match('<seg>.+</seg>', SSeg, re.IGNORECASE|re.DOTALL|re.MULTILINE):
 							mSeg = re.match('<seg>(.+)</seg>', SSeg, re.IGNORECASE|re.DOTALL|re.MULTILINE)
 							SSegBetweenTags = mSeg.group(1)
-							fOut.write(SSegBetweenTags + '\n')
+							fOut.write(str(ICountSegs) + '\t\t\t' + SSegBetweenTags + '\n')
 						else:
-							fOut.write(SSeg + '\n')
+							fOut.write(str(ICountSegs) + '\t\t\t' + SSeg + '\n')
 						
 						
 					if STypeOut == 'tseg.txt':
