@@ -28,8 +28,8 @@ class clGenerateOutput(object):
 					SFNameOut = SFNTemplate + '-' + SLangID + '-' + STypeOut
 					fOut = pathlib.Path(SFNameOut)
 					if STypeOut == 'gizapp.txt':
-						if re.match('<seg>.+</seg>', SSeg, re.I):
-							mSeg = re.match('<seg>(.+)</seg>', SSeg, re.I):
+						if re.match('<seg>.+</seg>', SSeg, re.IGNORECASE|re.DOTALL):
+							mSeg = re.match('<seg>(.+)</seg>', SSeg, re.IGNORECASE|re.DOTALL)
 							SSegBetweenTags = mSeg.group(1)
 							fOut.write_text(SSegBetweenTags + '\n', 'unicode')
 						
