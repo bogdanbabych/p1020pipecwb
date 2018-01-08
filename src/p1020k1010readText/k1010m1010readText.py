@@ -41,7 +41,7 @@ class clReadTMX(object):
 			for xmlTUV in xmlTU.findall('tuv'):
 				# testing with print 
 				print('\t', xmlTUV.attrib)
-				str1 = xmlTUV.tostring()
+				str1 = xmlTU.tostring(xmlTUV)
 				print(str1)
 				# for el in xmlTUV.itertext():
 				# 	print('\t\tITERTEXT', str(el))
