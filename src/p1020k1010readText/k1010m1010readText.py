@@ -31,11 +31,7 @@ class clGenerateOutput(object):
 				if re.match('<seg>.+</seg>', SSeg, re.IGNORECASE|re.DOTALL|re.MULTILINE):
 					mSeg = re.match('<seg>(.+)</seg>', SSeg, re.IGNORECASE|re.DOTALL|re.MULTILINE)
 					SSegBetweenTags = mSeg.group(1)
-					# fOut.write(str(ICountSegs) + '\t\t\t' + SSegBetweenTags + '\n')
-					# fOut.write(SSegBetweenTags + '\n')
 				else:
-					# fOut.write(str(ICountSegs) + '\t\t\t' + SSeg + '\n')
-					# fOut.write(SSegBetweenTags + '\n')
 					SSegBetweenTags = SSeg
 					pass
 				
@@ -43,9 +39,11 @@ class clGenerateOutput(object):
 					SFNameOut = SFNTemplate + '-' + SLangID + '-' + STypeOut
 					fOut = open(SFNameOut, 'a')
 					if STypeOut == 'gizapp.txt':
+						# fOut.write(str(ICountSegs) + '\t\t\t' + SSegBetweenTags + '\n')
 						fOut.write(SSegBetweenTags + '\n')						
 						
 					if STypeOut == 'tseg.txt':
+						# fOut.write(str(ICountSegs) + '\t\t\t' + SSeg + '\n')
 						fOut.write('<seg id="' + str(ICountSegs) + '">\n' + SSegBetweenTags + '\n</seg>\n')
 	
 
@@ -58,6 +56,8 @@ class clReadTMX(object):
 	def __init__(self, STmxIn):
 		'''
 		Generate root of the xml > tmx tree; identify segments, prepare a list of dictionaries {langID : segment} as output
+		todo: to add -- if removeTags=True --> then remove tags itertext function; tags only obscure output --> for corpus processing ?
+			unnecessary in case there is already linguistic annotation
 		'''
 		self.root = self.tmx2tree(STmxIn)
 		self.LDSegs = self.tree2segs(self.root) # temporary placeholder --> function to be implemented
