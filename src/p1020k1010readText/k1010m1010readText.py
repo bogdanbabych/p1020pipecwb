@@ -31,7 +31,7 @@ class clGenerateOutput(object):
 						if re.match('<seg>.+</seg>', SSeg, re.IGNORECASE|re.DOTALL):
 							mSeg = re.match('<seg>(.+)</seg>', SSeg, re.IGNORECASE|re.DOTALL)
 							SSegBetweenTags = mSeg.group(1)
-							fOut.write_text(SSegBetweenTags + '\n', 'unicode')
+							fOut.write_text(SSegBetweenTags + '\n')
 						
 					if STypeOut == 'tseg.txt':
 						pass
