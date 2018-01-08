@@ -50,6 +50,10 @@ the philosophy, scope and the conext of the project.
     2. tmx2giza ; giza2tmx toolkit --> start of PyParaCorpus project
     3. tmx2tseg ; tseg2tmx toolkit --> input for TreeTagger / other tagsets
     
+    4. possible 'health check' on tmx file: whether it contains
+    		one segment per tuv
+    		one language id per tu in each case --> and show / highlight problems...
+    
     
  [steps]
  	giza and tseg formats implementation
