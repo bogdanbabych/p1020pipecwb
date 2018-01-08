@@ -35,28 +35,15 @@ class clReadTMX(object):
 		problem resolved with tostring method: https://stackoverflow.com/questions/15304229/convert-python-elementtree-to-string
 		'''
 		LDSegs = []
-		print('in trees2seg:')
-		print(str(root), '\n')
-		for xmlTU in root.iter('tu'):
-			print(xmlTU.attrib)
-			# print(xmlTU.text)
-			for xmlTUV in xmlTU.findall('tuv'):
-				# if len(xmlTUV.findall('seg')) > 1: 
-				print('\t:segs=', str(len(xmlTUV.findall('seg'))))
-				for xmlSeg in xmlTUV.findall('seg'):
-					# if len(xmlSegs) > 1:
-					print('SEG:', ElementTree.tostring(xmlSeg, encoding='unicode', method='xml'))
-				# testing with print 
-				
-				print('\t', xmlTUV.attrib)
-				# str1 = ElementTree.tostring(xmlTUV, encoding='unicode', method='xml')
-				# print(str1)
-				# for el in xmlTUV.itertext():
-				# 	print('\t\tITERTEXT', str(el))
-					
-				# print(xmlTUV.text, '\n')
-				pass
-				
+		for xTU in root.iter('tu'):
+			DSegs = {}
+			for xTUV in xTU.findall('tuv'):
+				for SLangID in sorted( xTUV.attrib.values() ): # normally only one attribute-value pair occurs
+					xSEG = xTUV.find('seg')
+					DSegs[SLangID] =  xSEG
+			LDSegs.append(DSegs)
+		
+		print(str(LDSegs))
 		return LDSegs
 
 
