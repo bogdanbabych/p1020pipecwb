@@ -39,8 +39,9 @@ class clReadTMX(object):
 			print(xmlTU.text)
 			for xmlTUV in xmlTU.iter('tuv'):
 				# testing with print 
-				print(xmlTUV.attrib)
-				print(xmlTUV.text, '\n')
+				# print(xmlTUV.attrib)
+				# print(xmlTUV.text, '\n')
+				pass
 				
 		return LDSegs
 
