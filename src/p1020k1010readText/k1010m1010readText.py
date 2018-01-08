@@ -6,6 +6,7 @@ Created on 18 Dec 2017
 import sys, os, re
 import pathlib
 import xml.etree.ElementTree as ET
+from et_xmlfile.tests.common_imports import ElementTree
 
 
 class clReadTMX(object):
@@ -41,7 +42,7 @@ class clReadTMX(object):
 			for xmlTUV in xmlTU.findall('tuv'):
 				# testing with print 
 				print('\t', xmlTUV.attrib)
-				str1 = root.tostring(xmlTUV)
+				str1 = ElementTree.tostring(xmlTUV, encoding='utf8', method='xml')
 				print(str1)
 				# for el in xmlTUV.itertext():
 				# 	print('\t\tITERTEXT', str(el))
