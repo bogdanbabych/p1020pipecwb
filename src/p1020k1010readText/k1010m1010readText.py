@@ -34,6 +34,7 @@ class clReadTMX(object):
 		'''
 		LDSegs = []
 		print('in trees2seg:')
+		print(str(root), '\n')
 		for xmlTU in root.findall('tu'):
 			print(xmlTU.text)
 			for xmlTUV in xmlTU.findall('tuv'):
