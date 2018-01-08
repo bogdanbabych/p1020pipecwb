@@ -23,7 +23,7 @@ class clReadTMX(object):
 				
 	def tmx2tree(self, STmxIn):
 		root = ET.fromstring(STmxIn)
-		print(str(root), '\n')
+		# print(str(root), '\n')
 		# [experiments] with the root object can go here <<
 		return root
 	
@@ -35,6 +35,7 @@ class clReadTMX(object):
 		LDSegs = []
 		print('in trees2seg:')
 		for xmlTU in root.findall('tu'):
+			print(xmlTU.text)
 			for xmlTUV in xmlTU.findall('tuv'):
 				# testing with print 
 				print(xmlTU.attrib)
