@@ -32,6 +32,7 @@ class clReadTMX(object):
 		'''
 		main processing routine: generate an LD{langID:Seg} representation which can be then printed
 		documentation : https://docs.python.org/3.6/library/xml.etree.elementtree.html#elementtree-xpath
+		problem resolved with tostring method: https://stackoverflow.com/questions/15304229/convert-python-elementtree-to-string
 		'''
 		LDSegs = []
 		print('in trees2seg:')
@@ -40,6 +41,9 @@ class clReadTMX(object):
 			print(xmlTU.attrib)
 			# print(xmlTU.text)
 			for xmlTUV in xmlTU.findall('tuv'):
+				for xmlSegs in xmlTUV.findall('seg'):
+					if len(xmlSegs) > 1:
+						print('ERROR: seg >1', ElementTree.tostring(xmlSegs, encoding='unicode', method='xml'))
 				# testing with print 
 				print('\t', xmlTUV.attrib)
 				str1 = ElementTree.tostring(xmlTUV, encoding='unicode', method='xml')
