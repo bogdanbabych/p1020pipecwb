@@ -26,22 +26,27 @@ class clGenerateOutput(object):
 		for DSSeg in LDSDataSegs:
 			ICountSegs +=1
 			for SLangID, SSeg in sorted(DSSeg.items()):
+				# fOut = pathlib.Path(SFNameOut)
+				SSeg = re.sub('\n', ' ', SSeg, flags=re.IGNORECASE|re.DOTALL|re.MULTILINE)
+				if re.match('<seg>.+</seg>', SSeg, re.IGNORECASE|re.DOTALL|re.MULTILINE):
+					mSeg = re.match('<seg>(.+)</seg>', SSeg, re.IGNORECASE|re.DOTALL|re.MULTILINE)
+					SSegBetweenTags = mSeg.group(1)
+					# fOut.write(str(ICountSegs) + '\t\t\t' + SSegBetweenTags + '\n')
+					# fOut.write(SSegBetweenTags + '\n')
+				else:
+					# fOut.write(str(ICountSegs) + '\t\t\t' + SSeg + '\n')
+					# fOut.write(SSegBetweenTags + '\n')
+					SSegBetweenTags = SSeg
+					pass
+				
 				for STypeOut in LSTypesOut:
 					SFNameOut = SFNTemplate + '-' + SLangID + '-' + STypeOut
-					# fOut = pathlib.Path(SFNameOut)
 					fOut = open(SFNameOut, 'a')
 					if STypeOut == 'gizapp.txt':
-						SSeg = re.sub('\n', ' ', SSeg, flags=re.IGNORECASE|re.DOTALL|re.MULTILINE)
-						if re.match('<seg>.+</seg>', SSeg, re.IGNORECASE|re.DOTALL|re.MULTILINE):
-							mSeg = re.match('<seg>(.+)</seg>', SSeg, re.IGNORECASE|re.DOTALL|re.MULTILINE)
-							SSegBetweenTags = mSeg.group(1)
-							fOut.write(str(ICountSegs) + '\t\t\t' + SSegBetweenTags + '\n')
-						else:
-							fOut.write(str(ICountSegs) + '\t\t\t' + SSeg + '\n')
-						
+						fOut.write(SSegBetweenTags + '\n')						
 						
 					if STypeOut == 'tseg.txt':
-						pass
+						fOut.write('<seg id="' + str(ICountSegs) + '">\n' + SSegBetweenTags + '\n</seg>\n')
 	
 
 
