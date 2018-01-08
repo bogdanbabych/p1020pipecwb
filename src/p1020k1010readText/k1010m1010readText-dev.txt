@@ -108,7 +108,7 @@ L	{
 [2018/01/08 redesign]
 
 	clGenerateOutput
-		|-> 
+		|-> x
 		-> (FNTemplate:sys.argv[1], LD{LangID0-CountryID0-SeqNumber0 : SSegment}) -> *printGizapp -> SideEffect:printedFiles *.gizapp.txt
 		-> (FNTemplate:sys.argv[1], LD{LangID0-CountryID0-SeqNumber0 : SSegment}) -> *printTSeg -> SideEffect:printedFiles *.tseg.txt
 		
