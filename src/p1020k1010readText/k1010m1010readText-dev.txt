@@ -1,0 +1,137 @@
+
+2018/01/08
+Development structure for PyParaCorpus project 
+Purpose - understandign how to arrange and further develop modules in the project
+	- organising the developmet process; optimising structure; generating product / deliverables 
+	- focussing / leading the development effort...
+	- managing complexity --> the need to understand and build large complex projects
+	- maintain documentation ; keep up the development after a break;
+	- optimise structre, understandability, maintainability of the output;
+	- regression testing, etc. --> diff and error analysis...
+	
+
+[2018/01/08: current stage]
+	clGenerateOutputFileNames
+		|-> x
+		-> LT2S:('xml:lang','LangID') -> *genLangIDSuffixes -> LS:'numID-LangID'
+		-> (SfileNameTemplate, LS:'numID-LangID', IStageNum) -> *genFileNamesOut -> LS:'fileNameOut
+		
+		// todo: change to delivering a dictionary
+	
+	
+	clReadTMX
+		|-> 'STmx'-> *tmx2tree -> root
+		-> root -> *findLangIDs -> LT2S:('xml:lang','LangID')	// used in clGenerateOutputFileNames.genLangIDSuffixes
+		// todo: 
+
+
+ 	main:
+ 		clReadTMX.|->*tmx2tree
+ 		clReadTMX.*findLangIDs
+ 		clGenerateOutputFileNames.*genLangIDSuffixes
+ 		clGenerateOutputFileNames.*genFileNamesOut
+ 	
+
+[optimising structure]
+// purpose -- tmx2giza; tmx2tseg -> tagging; cwb
+// principle: printing / outputing function -- delegate to a separate class; therefore all the output needs to be prepared in central class (clReadTMX) 
+	regarding this as output preparation (only if necessary -- as a meaningful data structure
+	format of representation for printing 
+	
+	LD{'LangID':'SSeg'}
+	
+// design question: how robust is the TMX structure,
+	for example, if LangID is not unique in the xml file, another segment is added ?
+	> solution? > moving to numerical identifiers across the board? 
+	> solution > assumption of well-behaved TMX 
+	
+// design question: flexible parallel corpus format
+	derived from tmx, but
+		- capable of maintaining multiple translations of the same text into the same language; preserving translators' ID, etc.
+		- respecting order of segments
+		- respecting structure of the text: text bondaries, ?formatting
+		
+		tmxplus
+			tmx is a subset, can be converted back and forth using key assumptions...
+			> discource-level structure;
+			> transparent MT >> for translators and beyond
+			> foundation for technological solutions; reseach solutions, etc.
+			
+			
+	specification of tmxplus:
+		a format for parallel corpus representation
+		representation of unit structure (text / discourse level, sentence level, etc.)
+			structural and positional attributes
+			alignment information >> different levels
+			
+			integration of terminology information and terminology alignment 
+			
+		solution: overlapping structural annotation
+			> text, paragraph, turn, -- discourse-level tags (openning and closing) to be represented as pseudo-xml tags, then to be converted to tseg format
+			
+			generation of xtag format from alignment information...
+			
+			task: to represent format in new internal representation
+				>> units of different levels can be mutually aligned :: alignment to be represented separately from structure 
+				tmx -> do not rename the format;
+				tseg >> format -- to specify in fuller details
+				the problem -- what to represent explicitly :: alignment ; structure ? :: segment-level alignment ? lowest level of possible alignment?
+					how to represent information about phrase-level alignment ??? 
+					alignment for terminology and multiword expressions >> cwb representation >> structural ? 
+						>> tree / subtree / under-specified structure alignment ?
+						
+						start with a simplest working solution
+	principles of tmxplus
+		segment alignment representation -- explicit
+			features to represent sub-segment alignment, internal structure in segments and outside segments (dependency, constituency), termonology alignment and search
+			e.g., lemmatized terminology
+		starting from tmx...
+
+// tmxplus integration 
+	list -- ordered sequence!
+L	{
+		LangID0-CountryID0-SeqNumber0 : Segment
+		LangID1-CountryID1-SeqNumber1 : Segment
+	}
+	SeqNumber0 are formed and added to representation in a sequence; xml:lang attribute names are ignored...
+	
+	in file printing stage:
+		- create a common template
+		- use suffixes from the keys in list of dictionaries to complete output file names...
+		
+		
+		
+	SeqNumbers -- to be generated 10 + 1, etc. only if there are more than 1 representations with that combination : to be able to handle tmxplus in future
+	
+
+			
+[2018/01/08 redesign]
+
+	clGenerateOutput
+		|-> 
+		-> (FNTemplate:sys.argv[1], LD{LangID0-CountryID0-SeqNumber0 : SSegment}) -> *printGizapp -> SideEffect:printedFiles *.gizapp.txt
+		-> (FNTemplate:sys.argv[1], LD{LangID0-CountryID0-SeqNumber0 : SSegment}) -> *printTSeg -> SideEffect:printedFiles *.tseg.txt
+		
+		// segments are printed with segment IDs -- for alignment in cwb
+
+		// further: implement reverse conversion;
+		// processing with taggers, etc;
+		// conversion / representations as corpus workbench...
+		// experiments with terminology implementations
+	
+	
+	clReadTMX
+		|-> 'STmx'-> *tmx2tree -> root
+		|-> root -> *tree2segs -> LD{LangID0-CountryID0-SeqNumber0 : SSegment}
+		
+		// if there are more attribute:value pairs in segment OR if there are more entries for a language ID combination --> have same effect, segments are printed to new files 
+		// correcting possible errors in tmx --> has effect of normalising... 
+		// todo: old tuple not necessary; hide this; as we go, simply record occurrences of tags, convert them into LangID0-CountryID0-SeqNumber0 format
+		// more than one tag is possible 
+
+
+ 	main:
+ 		clReadTMX.|->*tmx2tree > *tree2segs
+ 		clGenerateOutput.*printGizapp
+ 		clGenerateOutput.*printTSeg
+

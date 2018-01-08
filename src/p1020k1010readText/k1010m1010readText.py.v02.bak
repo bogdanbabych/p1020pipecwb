@@ -107,7 +107,7 @@ if __name__ == '__main__':
 	'''
 	STmxIn = pathlib.Path(sys.argv[1]).read_text()
 	OReadTMX = clReadTMX(STmxIn)
-	LLangAttr = OReadTMX.findLangIDs(OReadTMX.root) # attribute / value pairs in a list for all languages creates a list of xml:lang='EN-UK'
+	LLangAttr = OReadTMX.findLangIDs(OReadTMX.root) # attribute / value pairs in a list for all languages
 	
 	# initialise the FileName generator object
 	OGenerateOutputFileNames = clGenerateOutputFileNames()
