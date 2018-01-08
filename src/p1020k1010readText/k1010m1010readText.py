@@ -29,6 +29,7 @@ class clGenerateOutput(object):
 					# fOut = pathlib.Path(SFNameOut)
 					fOut = open(SFNameOut, 'a')
 					if STypeOut == 'gizapp.txt':
+						SSeg = re.sub('\n', ' ', SSeg, flags=re.IGNORECASE|re.DOTALL|re.MULTILINE)
 						if re.match('<seg>.+</seg>', SSeg, re.IGNORECASE|re.DOTALL|re.MULTILINE):
 							mSeg = re.match('<seg>(.+)</seg>', SSeg, re.IGNORECASE|re.DOTALL|re.MULTILINE)
 							SSegBetweenTags = mSeg.group(1)
