@@ -41,7 +41,8 @@ class clReadTMX(object):
 			print(xmlTU.attrib)
 			# print(xmlTU.text)
 			for xmlTUV in xmlTU.findall('tuv'):
-				if len(xmlTUV.findall('seg')) > 1: print('\tERROR: segs>1')
+				# if len(xmlTUV.findall('seg')) > 1: 
+				print('\t:segs=', str(len(xmlTUV.findall('seg'))))
 				for xmlSeg in xmlTUV.findall('seg'):
 					# if len(xmlSegs) > 1:
 					print('SEG:', ElementTree.tostring(xmlSeg, encoding='unicode', method='xml'))
