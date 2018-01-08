@@ -25,6 +25,7 @@ class clGenerateOutput(object):
 		ICountSegs = 1000000
 		for DSSeg in LDSDataSegs:
 			ICountSegs +=1
+			if ICountSegs % 3000 == 0: sys.stderr.write(str(ICountSegs) + '\n')
 			for SLangID, SSeg in sorted(DSSeg.items()):
 				# fOut = pathlib.Path(SFNameOut)
 				SSeg = re.sub('\n', ' ', SSeg, flags=re.IGNORECASE|re.DOTALL|re.MULTILINE)
