@@ -9,6 +9,35 @@ import xml.etree.ElementTree as ET
 from et_xmlfile.tests.common_imports import ElementTree
 
 
+
+class clGenerateOutput(object):
+	'''
+	printing outputs
+	'''
+	def __init__(self, SFNTemplate, LDSDataSegs, LSTypesOut=['gizapp.txt']):
+		'''
+		constructor. Allowed LSTypesOut=['gizapp.txt', 'tseg.txt']
+		'''
+		self.printSegs(SFNTemplate, LDSDataSegs, LSTypesOut)
+
+	
+	def printSegs(self, SFNTemplate, LDSDataSegs, LSTypesOut):
+		for DSSeg in LDSDataSegs:
+			for SLangID, SSeg in sorted(DSSeg.items()):
+				for STypeOut in LSTypesOut:
+					SFNameOut = SFNTemplate + '-' + SLangID + '-' + STypeOut
+					fOut = pathlib.Path(SFNameOut)
+					if STypeOut == 'gizapp.txt':
+						if re.match('<seg>.+</seg>', SSeg, re.I):
+							mSeg = re.match('<seg>(.+)</seg>', SSeg, re.I):
+							SSegBetweenTags = mSeg.group(1)
+							fOut.write_text(SSegBetweenTags + '\n', 'unicode')
+						
+					if STypeOut == 'tseg.txt':
+						pass
+	
+
+
 class clReadTMX(object):
 	'''
 	main class
@@ -21,6 +50,9 @@ class clReadTMX(object):
 		self.root = self.tmx2tree(STmxIn)
 		self.LDSegs = self.tree2segs(self.root) # temporary placeholder --> function to be implemented
 		return
+	
+	def getData(self):
+		return self.LDSegs
 				
 	def tmx2tree(self, STmxIn):
 		root = ET.fromstring(STmxIn)
@@ -43,8 +75,7 @@ class clReadTMX(object):
 					SSeg = ElementTree.tostring(xSEG, encoding='unicode', method='xml')
 					DSegs[SLangID] =  SSeg
 			LDSegs.append(DSegs)
-		
-		print(str(LDSegs))
+		# print(str(LDSegs))
 		return LDSegs
 
 
@@ -53,7 +84,8 @@ if __name__ == '__main__':
 	running script if the module is called from the main
 	'''
 	STmxIn = pathlib.Path(sys.argv[1]).read_text()
-	OReadTMX = clReadTMX(STmxIn)
+	LDSegs = clReadTMX(STmxIn).getData()
+	OGenerateOutput = clGenerateOutput(sys.argv[1], LDSegs, ['gizapp.txt', 'tseg.txt'])
 	# end __main__
 
 
