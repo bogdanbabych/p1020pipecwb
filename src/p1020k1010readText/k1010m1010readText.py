@@ -23,6 +23,7 @@ class clReadTMX(object):
 				
 	def tmx2tree(self, STmxIn):
 		root = ET.fromstring(STmxIn)
+		print(str(root), '\n')
 		# [experiments] with the root object can go here <<
 		return root
 	
@@ -32,6 +33,7 @@ class clReadTMX(object):
 		documentation : https://docs.python.org/3.6/library/xml.etree.elementtree.html#elementtree-xpath
 		'''
 		LDSegs = []
+		print('in trees2seg:')
 		for xmlTU in root.findall('tu'):
 			for xmlTUV in xmlTU.findall('tuv'):
 				# testing with print 
