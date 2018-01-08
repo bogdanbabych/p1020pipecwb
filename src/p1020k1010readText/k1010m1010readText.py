@@ -26,7 +26,8 @@ class clGenerateOutput(object):
 			for SLangID, SSeg in sorted(DSSeg.items()):
 				for STypeOut in LSTypesOut:
 					SFNameOut = SFNTemplate + '-' + SLangID + '-' + STypeOut
-					fOut = pathlib.Path(SFNameOut)
+					# fOut = pathlib.Path(SFNameOut)
+					fOut = open(SFNameOut, 'a')
 					if STypeOut == 'gizapp.txt':
 						if re.match('<seg>.+</seg>', SSeg, re.IGNORECASE|re.DOTALL):
 							mSeg = re.match('<seg>(.+)</seg>', SSeg, re.IGNORECASE|re.DOTALL)
