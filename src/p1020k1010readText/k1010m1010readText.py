@@ -40,7 +40,8 @@ class clReadTMX(object):
 			for xTUV in xTU.findall('tuv'):
 				for SLangID in sorted( xTUV.attrib.values() ): # normally only one attribute-value pair occurs
 					xSEG = xTUV.find('seg')
-					DSegs[SLangID] =  xSEG
+					SSeg = ElementTree.tostring(xSEG, encoding='unicode', method='xml')
+					DSegs[SLangID] =  SSeg
 			LDSegs.append(DSegs)
 		
 		print(str(LDSegs))
