@@ -9,7 +9,6 @@ import xml.etree.ElementTree as ET
 from et_xmlfile.tests.common_imports import ElementTree
 
 
-
 class clGenerateOutput(object):
 	'''
 	printing outputs
@@ -34,7 +33,6 @@ class clGenerateOutput(object):
 					SSegBetweenTags = mSeg.group(1)
 				else:
 					SSegBetweenTags = SSeg
-					pass
 				
 				for STypeOut in LSTypesOut:
 					SFNameOut = SFNTemplate + '-' + SLangID + '-' + STypeOut
@@ -45,23 +43,22 @@ class clGenerateOutput(object):
 						
 					if STypeOut == 'tseg.txt':
 						# fOut.write(str(ICountSegs) + '\t\t\t' + SSeg + '\n')
-						fOut.write('<seg id="' + str(ICountSegs) + '">\n' + SSegBetweenTags + '\n</seg>\n')
+						fOut.write('<seg id="' + str(ICountSegs) + '">\n' + SSegBetweenTags + '\n</seg>\n\n')
 	
-
 
 class clReadTMX(object):
 	'''
 	main class
 	readsTMX file / string and outputs one-line per-sentence output 
 	'''
-	def __init__(self, STmxIn):
+	def __init__(self, STmxIn, BRemoveTags=True):
 		'''
 		Generate root of the xml > tmx tree; identify segments, prepare a list of dictionaries {langID : segment} as output
 		todo: to add -- if removeTags=True --> then remove tags itertext function; tags only obscure output --> for corpus processing ?
 			unnecessary in case there is already linguistic annotation
 		'''
 		self.root = self.tmx2tree(STmxIn)
-		self.LDSegs = self.tree2segs(self.root) # temporary placeholder --> function to be implemented
+		self.LDSegs = self.tree2segs(self.root, BRemoveTags) # temporary placeholder --> function to be implemented
 		return
 	
 	def getData(self):
@@ -73,7 +70,7 @@ class clReadTMX(object):
 		# [experiments] with the root object can go here <<
 		return root
 	
-	def tree2segs (self, root):
+	def tree2segs (self, root, BRemoveTags):
 		'''
 		main processing routine: generate an LD{langID:Seg} representation which can be then printed
 		documentation : https://docs.python.org/3.6/library/xml.etree.elementtree.html#elementtree-xpath
@@ -85,7 +82,12 @@ class clReadTMX(object):
 			for xTUV in xTU.findall('tuv'):
 				for SLangID in sorted( xTUV.attrib.values() ): # normally only one attribute-value pair occurs
 					xSEG = xTUV.find('seg')
-					SSeg = ElementTree.tostring(xSEG, encoding='unicode', method='xml')
+					if BRemoveTags == True:
+						SSeg = ''
+						for el in xSEG.itertext():
+							SSeg += el
+					else:
+						SSeg = ElementTree.tostring(xSEG, encoding='unicode', method='xml')
 					DSegs[SLangID] =  SSeg
 			LDSegs.append(DSegs)
 		# print(str(LDSegs))
