@@ -18,6 +18,7 @@ class clGenerateOutput(object):
 		constructor. Allowed LSTypesOut=['gizapp.txt', 'tseg.txt']
 		'''
 		self.printSegs(SFNTemplate, LDSDataSegs, LSTypesOut)
+		return
 
 	
 	def printSegs(self, SFNTemplate, LDSDataSegs, LSTypesOut):
@@ -44,8 +45,8 @@ class clGenerateOutput(object):
 					if STypeOut == 'tseg.txt':
 						# fOut.write(str(ICountSegs) + '\t\t\t' + SSeg + '\n')
 						fOut.write('<seg id="' + str(ICountSegs) + '">\n' + SSegBetweenTags + '\n</seg>\n\n')
+		return
 	
-
 class clReadTMX(object):
 	'''
 	main class
@@ -58,7 +59,7 @@ class clReadTMX(object):
 			unnecessary in case there is already linguistic annotation
 		'''
 		self.root = self.tmx2tree(STmxIn)
-		self.LDSegs = self.tree2segs(self.root, BRemoveTags) # temporary placeholder --> function to be implemented
+		self.LDSegs = self.tree2segs(self.root, BRemoveTags)
 		return
 	
 	def getData(self):
@@ -66,7 +67,6 @@ class clReadTMX(object):
 				
 	def tmx2tree(self, STmxIn):
 		root = ET.fromstring(STmxIn)
-		# print(str(root), '\n')
 		# [experiments] with the root object can go here <<
 		return root
 	
@@ -96,7 +96,8 @@ class clReadTMX(object):
 
 if __name__ == '__main__':
 	'''
-	running script if the module is called from the main
+	running script if the module is called from the main;
+	- you can adjust parameters here, e.g.: BRemoveTags=False, etc., no command line parameters are used
 	'''
 	STmxIn = pathlib.Path(sys.argv[1]).read_text()
 	LDSegs = clReadTMX(STmxIn, BRemoveTags=True).getData()
