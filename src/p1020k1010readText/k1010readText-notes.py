@@ -147,7 +147,7 @@ class clGenerateOutput(object):
 
 # removed from :
 if __name__ == '__main__':
-	[py code]
+	# [py code]
 	LLangAttr = OReadTMX.findLangIDs(OReadTMX.root) # attribute / value pairs in a list for all languages creates a list of xml:lang='EN-UK'
 	
 	# initialise the FileName generator object

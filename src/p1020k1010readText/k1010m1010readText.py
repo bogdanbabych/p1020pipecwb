@@ -99,7 +99,7 @@ if __name__ == '__main__':
 	running script if the module is called from the main
 	'''
 	STmxIn = pathlib.Path(sys.argv[1]).read_text()
-	LDSegs = clReadTMX(STmxIn).getData()
+	LDSegs = clReadTMX(STmxIn, BRemoveTags=True).getData()
 	OGenerateOutput = clGenerateOutput(sys.argv[1], LDSegs, ['gizapp.txt', 'tseg.txt'])
 	# end __main__
 
