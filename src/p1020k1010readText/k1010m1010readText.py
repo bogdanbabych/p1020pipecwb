@@ -2,6 +2,12 @@
 Created on 18 Dec 2017
 
 @author: bogdan
+
+tmx file transformed into :
+	gizapp format;
+	tag-seg xml format
+	tab separated HunAlign format (possible to shift around, etc. in a spreadsheet)
+
 '''
 import sys, os, re
 import pathlib
@@ -20,24 +26,35 @@ class clGenerateOutput(object):
 		self.printSegs(SFNTemplate, LDSDataSegs, LSTypesOut)
 		return
 
-	
 	def printSegs(self, SFNTemplate, LDSDataSegs, LSTypesOut):
 		ICountSegs = 1000000
+		# hunalign filename:
+		if 'hunalign.txt' in LSTypesOut: 
+			SFNameOutHun = SFNTemplate + '-' + '-' + 'hunalign.txt'
+			FNameOutHun = open(SFNameOutHun, 'w')
+		# for each aligned pair/tuple of segments:
 		for DSSeg in LDSDataSegs:
 			ICountSegs +=1
 			if ICountSegs % 3000 == 0: sys.stderr.write(str(ICountSegs) + '\n')
+			# for each language string in an aligned segment pair / tuple:
 			for SLangID, SSeg in sorted(DSSeg.items()):
 				# fOut = pathlib.Path(SFNameOut)
 				SSeg = re.sub('\n', ' ', SSeg, flags=re.IGNORECASE|re.DOTALL|re.MULTILINE)
+				# removing <seg/> tags:
 				if re.match('<seg>.+</seg>', SSeg, re.IGNORECASE|re.DOTALL|re.MULTILINE):
 					mSeg = re.match('<seg>(.+)</seg>', SSeg, re.IGNORECASE|re.DOTALL|re.MULTILINE)
 					SSegBetweenTags = mSeg.group(1)
 				else:
 					SSegBetweenTags = SSeg
-				
+				# printing required output format
+				# special treatment for Hunalign output format:
+				if 'hunalign.txt' in LSTypesOut:
+					FNameOutHun.write(SSegBetweenTags + '\t')
 				for STypeOut in LSTypesOut:
 					SFNameOut = SFNTemplate + '-' + SLangID + '-' + STypeOut
 					fOut = open(SFNameOut, 'a')
+					# different output formats are printed here
+					if STypeOut == 'hunalign.txt': continue # we deal with this one level up
 					if STypeOut == 'gizapp.txt':
 						# fOut.write(str(ICountSegs) + '\t\t\t' + SSegBetweenTags + '\n')
 						fOut.write(SSegBetweenTags + '\n')						
@@ -45,6 +62,10 @@ class clGenerateOutput(object):
 					if STypeOut == 'tseg.txt':
 						# fOut.write(str(ICountSegs) + '\t\t\t' + SSeg + '\n')
 						fOut.write('<seg id="' + str(ICountSegs) + '">\n' + SSegBetweenTags + '\n</seg>\n\n')
+			# closing each Hunalign line with a newline character
+			if 'hunalign.txt' in LSTypesOut:
+				FNameOutHun.write('1\n' ) # alignment probability = 1 (since comes from manually aligned data), newline character for each line
+					
 		return
 	
 class clReadTMX(object):
@@ -101,7 +122,7 @@ if __name__ == '__main__':
 	'''
 	STmxIn = pathlib.Path(sys.argv[1]).read_text()
 	LDSegs = clReadTMX(STmxIn, BRemoveTags=True).getData()
-	OGenerateOutput = clGenerateOutput(sys.argv[1], LDSegs, ['gizapp.txt', 'tseg.txt'])
+	OGenerateOutput = clGenerateOutput(sys.argv[1], LDSegs, ['gizapp.txt', 'tseg.txt', 'hunalign.txt'])
 	# end __main__
 
 
