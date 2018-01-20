@@ -30,7 +30,7 @@ class clGenerateOutput(object):
 		ICountSegs = 1000000
 		# hunalign filename:
 		if 'hunalign.txt' in LSTypesOut: 
-			SFNameOutHun = SFNTemplate + '-' + '-' + 'hunalign.txt'
+			SFNameOutHun = SFNTemplate + '-' + 'res-hunalign.txt'
 			FNameOutHun = open(SFNameOutHun, 'w')
 		# for each aligned pair/tuple of segments:
 		for DSSeg in LDSDataSegs:
@@ -49,12 +49,13 @@ class clGenerateOutput(object):
 				# printing required output format
 				# special treatment for Hunalign output format:
 				if 'hunalign.txt' in LSTypesOut:
-					FNameOutHun.write(SSegBetweenTags + '\t')
+					SSegBetweenTagsHun = re.sub('\t+', '    ', SSegBetweenTags, re.IGNORECASE|re.DOTALL|re.MULTILINE) # replacing tabs for Hunalign format
+					FNameOutHun.write(SSegBetweenTagsHun + '\t')
 				for STypeOut in LSTypesOut:
+					if STypeOut == 'hunalign.txt': continue # we deal with this one level up, do not create Hunalign file name
 					SFNameOut = SFNTemplate + '-' + SLangID + '-' + STypeOut
 					fOut = open(SFNameOut, 'a')
 					# different output formats are printed here
-					if STypeOut == 'hunalign.txt': continue # we deal with this one level up
 					if STypeOut == 'gizapp.txt':
 						# fOut.write(str(ICountSegs) + '\t\t\t' + SSegBetweenTags + '\n')
 						fOut.write(SSegBetweenTags + '\n')						
