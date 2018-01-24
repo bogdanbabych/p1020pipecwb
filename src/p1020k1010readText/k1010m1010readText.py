@@ -35,7 +35,7 @@ class clGenerateOutput(object):
 		# for each aligned pair/tuple of segments:
 		for DSSeg in LDSDataSegs:
 			ICountSegs +=1
-			if ICountSegs % 3000 == 0: sys.stderr.write(str(ICountSegs) + '\n')
+			if ICountSegs % 2000 == 0: sys.stderr.write(str(ICountSegs) + '\n')
 			# for each language string in an aligned segment pair / tuple:
 			for SLangID, SSeg in sorted(DSSeg.items()):
 				# fOut = pathlib.Path(SFNameOut)
