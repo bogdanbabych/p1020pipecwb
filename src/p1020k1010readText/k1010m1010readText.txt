@@ -6,6 +6,15 @@ the purpose
     read files for processing in cwb
     
     working with Ukrainian military texts
+		extracting terminology!!!
+		Different pipelines
+			>> statistical; 
+			>> stopword based
+			>> part-of-speech configurations
+			>> MWEs
+			
+			explorations in the combinatory field model...
+			
     
     tmx files
     and

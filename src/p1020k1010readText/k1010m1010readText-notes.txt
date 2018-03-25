@@ -1,0 +1,15 @@
+
+
+commands to use:
+English tree tagger 
+/corpora/tools/treetagger/cmd/tree-tagger-english test.txt >test.out
+
+
+[smlbb@smlc12 all]$ wc guardian.txt independent.txt telegraph.txt times.txt
+   1191629   47499766  301473894 guardian.txt
+    253623   53454525  404886214 independent.txt
+    217238   45547292  340677453 telegraph.txt
+    470557   86888213  670999264 times.txt
+   2133047  233389796 1718036825 total
+   
+   
