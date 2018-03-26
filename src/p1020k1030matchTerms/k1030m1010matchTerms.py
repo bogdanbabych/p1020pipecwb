@@ -57,7 +57,7 @@ class clMatchTerms(object):
 				SSource = LSFields[0]
 				STarget = LSFields[1]
 				
-				print(SSource)
+				# print(SSource)
 			except:
 				continue
 			if re.search(CRETerms, SSource):
@@ -65,8 +65,8 @@ class clMatchTerms(object):
 				for match in re.finditer(CRETerms, SSource):
 					SSource = re.sub(match.group(0), '<term>\g<0></term>', SSource)
 					print(match.group(0))
+				print(SSource + '\t', STarget)
 				print('')
-				# print(SSource + '\t', STarget)
 					
 				
 				
