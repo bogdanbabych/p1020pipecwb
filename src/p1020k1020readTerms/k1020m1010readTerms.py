@@ -77,7 +77,7 @@ if __name__ == '__main__':
 	SFNOut = clGenFineNames(sys.argv[1], ['.csv']).getData()[0]
 	
 	OReadTermsFromText = clReadTermsFromText(SReadTxtIn)
-	OReadTermsFromText.printData(SFNOut, [0,1])
+	OReadTermsFromText.printData(SFNOut, [0])
 	
 	
 	
