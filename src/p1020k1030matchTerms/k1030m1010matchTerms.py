@@ -37,7 +37,14 @@ class clMatchTerms(object):
 			STerm = re.sub('[\(\)]', ' ', STerm)
 			
 			if STerm == '': continue
-			LTerms.append(STerm)
+			STerm1 = ' ' + STerm + '[ ,:;\?!]'
+			STerm2 = '^' + STerm + '[ ,:;\?!]'
+			STerm3 = ' ' + STerm + '$'
+			STerm4 = '^' + STerm + '$'
+			LTerms.append(STerm1)
+			LTerms.append(STerm2)
+			LTerms.append(STerm3)
+			LTerms.append(STerm4)
 			
 		# create RE and compile it
 		RETerms = '|'.join(LTerms)
