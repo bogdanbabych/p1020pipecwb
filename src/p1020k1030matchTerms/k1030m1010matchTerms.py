@@ -45,7 +45,7 @@ class clMatchTerms(object):
 			STerm4 = '^' + STerm + '$'
 			
 			
-			LTerms.append(STerm)
+			# LTerms.append(STerm)
 			
 			
 			'''
