@@ -49,8 +49,11 @@ class clMatchTerms(object):
 		'''
 		for SLine in STextIn:
 			LSFields = re.split('\t', SLine)
-			SSource = LSFields[0]
-			STarget = LSFields[1]
+			try:
+				SSource = LSFields[0]
+				STarget = LSFields[1]
+			except:
+				continue
 			if re.search(CRETerms, SSource):
 				# re.sub(CRETerms, <term>\0</term>, STextIn)
 				for match in re.finditer(CRETerms, SSource):
