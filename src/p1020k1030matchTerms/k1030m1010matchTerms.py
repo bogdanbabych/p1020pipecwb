@@ -51,10 +51,13 @@ class clMatchTerms(object):
 		task: match, tag, write down into a separate file -- output of the annotation (only those lines where terms were matched)
 		'''
 		for SLine in STextIn:
+			SLine = SLine.rstrip()
 			LSFields = re.split('\t', SLine)
 			try:
 				SSource = LSFields[0]
 				STarget = LSFields[1]
+				
+				print(SSource)
 			except:
 				continue
 			if re.search(CRETerms, SSource):
@@ -77,8 +80,9 @@ class clMatchTerms(object):
 	
 
 if __name__ == '__main__':
-	STextIn = pathlib.Path(sys.argv[1]).read_text()
-	STermsIn = pathlib.Path(sys.argv[2]).read_text()
+	STermsIn = pathlib.Path(sys.argv[1]).read_text()
+	STextIn = pathlib.Path(sys.argv[2]).read_text()
+
 	SFNOut = m8510GenFileNames.clGenFineNames(sys.argv[1], ['-terms.txt']).getData()[0]
 
 	# print(SFNOut)

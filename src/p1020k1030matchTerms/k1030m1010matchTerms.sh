@@ -1,1 +1,1 @@
-python k1030m1010matchTerms.py ../../../p1020d/k1010-TM-ENG-UKR.tmx-res-hunalign.txt ../../../p1020d/dictionary.csv >../../../p1020d/k1030m1010matchTerms-debug.txt
+python k1030m1010matchTerms.py ../../../p1020d/dictionary.csv ../../../p1020d/k1010-TM-ENG-UKR.tmx-res-hunalign.txt >../../../p1020d/k1030m1010matchTerms-debug.txt
