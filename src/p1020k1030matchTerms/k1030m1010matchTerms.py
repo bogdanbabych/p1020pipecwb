@@ -41,7 +41,7 @@ class clMatchTerms(object):
 		
 		LTermsIn = STermsIn.splitlines()
 		
-		LTermsNLen = [ (STerm, ILen) for STerm in LTermsIn for ILen in self.countWords(STerm) ]
+		LTermsNLen = [ (STerm, self.countWords(STerm)) for STerm in LTermsIn  ]
 		LTermsNLenSorted = sorted(LTermsNLen, key=lambda x: x[1], reverse = True)
 		
 		print(LTermsNLenSorted)
