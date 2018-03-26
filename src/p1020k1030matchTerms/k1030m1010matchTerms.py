@@ -33,6 +33,8 @@ class clMatchTerms(object):
 		'''
 		LTerms = []
 		for STerm in STermsIn:
+			STerm = STerm.rstrip()
+			STerm = re.sub('[\(\)]', ' ', STerm)
 			LTerms.append(STerm)
 			
 		# create RE and compile it
