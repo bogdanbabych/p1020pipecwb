@@ -39,27 +39,27 @@ class clMatchTerms(object):
 			
 			if STerm == '': continue
 			
+			STerm = '(?<= )' + STerm + '(?=[ ,:;\?\.!])'
+			
+			LTerms.append(STerm)
+			
+			'''			
 			STerm1 = '(?<= )' + STerm + '(?=[ ,:;\?\.!])'
 			STerm2 = '^' + STerm + '(?=[ ,:;\?!])'
 			STerm3 = '(?<= )' + STerm + '$'
 			STerm4 = '^' + STerm + '$'
-			
-			
-			# LTerms.append(STerm)
-			
-			
-			'''
+
 			STerm1 = ' ' + STerm + '[ ,:;\?!]'
 			STerm2 = '^' + STerm + '[ ,:;\?!]'
 			STerm3 = ' ' + STerm + '$'
 			STerm4 = '^' + STerm + '$'
-			'''
+
 			LTerms.append(STerm1)
 			LTerms.append(STerm2)
 			LTerms.append(STerm3)
 			LTerms.append(STerm4)
-			
-			
+			'''
+
 		# create RE and compile it
 		RETerms = '|'.join(LTerms)
 		print(RETerms)
@@ -78,9 +78,13 @@ class clMatchTerms(object):
 				SSource = LSFields[0]
 				STarget = LSFields[1]
 				
-				# print(SSource)
+				SSource = ' ' + SSource + ' '
+				
 			except:
+				SSource = ''
+				STarget = ''
 				continue
+			
 			if re.search(CRETerms, SSource):
 				# re.sub(CRETerms, <term>\0</term>, STextIn)
 				for match in re.finditer(CRETerms, SSource):
