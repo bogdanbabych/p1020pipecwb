@@ -170,6 +170,24 @@ if __name__ == '__main__':
 
 
 
+	'''			
+	STerm1 = '(?<= )' + STerm + '(?=[ ,:;\?\.!])'
+	STerm2 = '^' + STerm + '(?=[ ,:;\?!])'
+	STerm3 = '(?<= )' + STerm + '$'
+	STerm4 = '^' + STerm + '$'
+
+	STerm1 = ' ' + STerm + '[ ,:;\?!]'
+	STerm2 = '^' + STerm + '[ ,:;\?!]'
+	STerm3 = ' ' + STerm + '$'
+	STerm4 = '^' + STerm + '$'
+
+	LTerms.append(STerm1)
+	LTerms.append(STerm2)
+	LTerms.append(STerm3)
+	LTerms.append(STerm4)
+	'''
+
+
 
 
 

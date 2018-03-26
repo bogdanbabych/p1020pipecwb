@@ -26,6 +26,11 @@ class clMatchTerms(object):
 		
 		
 		return 
+	
+	def countWords(self, STerm):
+		LTerm = re.split(' ', STerm)
+		ILen = len(LTerm)
+		return ILen
 
 	def makeCREfromTerms(self, STermsIn):
 		'''
@@ -33,7 +38,16 @@ class clMatchTerms(object):
 		'''
 		LTerms = []  # longer
 		# LTerms0 = [] # shorter
-		for STerm in STermsIn.splitlines():
+		
+		LTermsIn = STermsIn.splitlines()
+		
+		LTermsNLen = [ (STerm, ILen) for Term in LTermsIn for Len in self.countWords(STerm) ]
+		LTermsNLenSorted = sorted(LTermsNLen, key=lambda x: x[1], reverse = True)
+		
+		print(LTermsNLenSorted)
+		
+		
+		for STerm, Len in STermsIn.splitlines():
 			STerm = STerm.rstrip()
 			STerm = re.sub('[\(\)]', ' ', STerm)
 			
@@ -42,23 +56,6 @@ class clMatchTerms(object):
 			STerm = '(?<= )' + STerm + '(?=[ ,:;\?\.!])'
 			
 			LTerms.append(STerm)
-			
-			'''			
-			STerm1 = '(?<= )' + STerm + '(?=[ ,:;\?\.!])'
-			STerm2 = '^' + STerm + '(?=[ ,:;\?!])'
-			STerm3 = '(?<= )' + STerm + '$'
-			STerm4 = '^' + STerm + '$'
-
-			STerm1 = ' ' + STerm + '[ ,:;\?!]'
-			STerm2 = '^' + STerm + '[ ,:;\?!]'
-			STerm3 = ' ' + STerm + '$'
-			STerm4 = '^' + STerm + '$'
-
-			LTerms.append(STerm1)
-			LTerms.append(STerm2)
-			LTerms.append(STerm3)
-			LTerms.append(STerm4)
-			'''
 			
 		# create RE and compile it
 		RETerms = '|'.join(LTerms)
