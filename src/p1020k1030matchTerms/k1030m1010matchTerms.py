@@ -59,10 +59,10 @@ class clMatchTerms(object):
 			LTerms.append(STerm3)
 			LTerms.append(STerm4)
 			'''
-
+			
 		# create RE and compile it
 		RETerms = '|'.join(LTerms)
-		print(RETerms)
+		# print(RETerms)
 		CRETerms = re.compile(RETerms, re.I)
 		
 		return CRETerms
@@ -95,10 +95,6 @@ class clMatchTerms(object):
 				print(SSource + '\t', STarget)
 				print('')
 					
-				
-				
-		
-	
 
 # end clMatchTerms class
 	
