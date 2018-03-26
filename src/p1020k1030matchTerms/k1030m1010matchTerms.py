@@ -46,8 +46,9 @@ class clMatchTerms(object):
 		
 		print(LTermsNLenSorted)
 		
-		
-		for STerm in STermsIn.splitlines():
+		# longest match first... 
+		# for STerm in STermsIn.splitlines():
+		for STerm, ILen in LTermsNLenSorted:
 			STerm = STerm.rstrip()
 			STerm = re.sub('[\(\)]', ' ', STerm)
 			
