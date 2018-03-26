@@ -32,7 +32,7 @@ class clMatchTerms(object):
 		one term per line format is converted into RE with disjunction
 		'''
 		LTerms = []
-		for STerm in STermsIn:
+		for STerm in STermsIn.splitlines():
 			STerm = STerm.rstrip()
 			STerm = re.sub('[\(\)]', ' ', STerm)
 			
