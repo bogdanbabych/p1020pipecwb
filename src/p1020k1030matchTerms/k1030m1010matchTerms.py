@@ -44,7 +44,7 @@ class clMatchTerms(object):
 		LTermsNLen = [ (STerm, self.countWords(STerm)) for STerm in LTermsIn  ]
 		LTermsNLenSorted = sorted(LTermsNLen, key=lambda x: x[1], reverse = True)
 		
-		print(LTermsNLenSorted)
+		# print(LTermsNLenSorted)
 		
 		# longest match first... 
 		# for STerm in STermsIn.splitlines():
@@ -69,6 +69,8 @@ class clMatchTerms(object):
 		'''
 		task: match, tag, write down into a separate file -- output of the annotation (only those lines where terms were matched)
 		'''
+		LMatchedTerms = []
+		ICountMatchSen = 0
 		for SLine in STextIn.splitlines():
 			SLine = SLine.rstrip()
 			LSFields = re.split('\t', SLine)
@@ -84,6 +86,7 @@ class clMatchTerms(object):
 				continue
 			
 			if re.search(CRETerms, SSource):
+				ICountMatchSen += 1
 				# re.sub(CRETerms, <term>\0</term>, STextIn)
 				i = 0
 				for match in re.finditer(CRETerms, SSource):
@@ -93,9 +96,15 @@ class clMatchTerms(object):
 					# SMatch = match.group(0)
 					SSource = re.sub('(?<= )' + match.group(0) + '(?=[ ,:;\?\.!])', '<term id=%s>\g<0></term>' % SLong, SSource)
 					print(match.group(0))
+					LMatchedTerms.append(match.group(0))
 					# print(SMatch)
-				print(SSource + '\t', STarget)
+				print(str(ICountMatchSen) + '\t' + SSource + '\t', STarget)
 				print('')
+		ILenMatchedTerms = len(LMatchedTerms)
+		ILenMatchedUnique = len(set(LMatchedTerms))
+		print('Terms:' + str(ILenMatchedTerms) + '\tUnique:' + str(ILenMatchedUnique))
+		print(set(LMatchedTerms))
+		
 					
 
 # end clMatchTerms class
