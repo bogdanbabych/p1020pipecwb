@@ -37,10 +37,10 @@ class clMatchTerms(object):
 			STerm = re.sub('[\(\)]', ' ', STerm)
 			
 			if STerm == '': continue
-			STerm1 = ' ' + STerm + '[ ,:;\?!]'
-			STerm2 = '^' + STerm + '[ ,:;\?!]'
-			STerm3 = ' ' + STerm + '$'
-			STerm4 = '^' + STerm + '$'
+			STerm1 = ' (' + STerm + ')[ ,:;\?!]'
+			STerm2 = '^(' + STerm + ')[ ,:;\?!]'
+			STerm3 = ' (' + STerm + ')$'
+			STerm4 = '^(' + STerm + ')$'
 			LTerms.append(STerm1)
 			LTerms.append(STerm2)
 			LTerms.append(STerm3)
@@ -70,8 +70,8 @@ class clMatchTerms(object):
 			if re.search(CRETerms, SSource):
 				# re.sub(CRETerms, <term>\0</term>, STextIn)
 				for match in re.finditer(CRETerms, SSource):
-					SSource = re.sub(match.group(0), '<term>\g<0></term>', SSource)
-					print(match.group(0))
+					SSource = re.sub(match.group(1), '<term>\g<1></term>', SSource)
+					print(match.group(1))
 				print(SSource + '\t', STarget)
 				print('')
 					
