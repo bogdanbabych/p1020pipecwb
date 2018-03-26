@@ -35,10 +35,13 @@ class clMatchTerms(object):
 		for STerm in STermsIn:
 			STerm = STerm.rstrip()
 			STerm = re.sub('[\(\)]', ' ', STerm)
+			
+			if STerm == '': continue
 			LTerms.append(STerm)
 			
 		# create RE and compile it
 		RETerms = '|'.join(LTerms)
+		print(RETerms)
 		CRETerms = re.compile(RETerms, re.I)
 		
 		return CRETerms
@@ -58,8 +61,8 @@ class clMatchTerms(object):
 				# re.sub(CRETerms, <term>\0</term>, STextIn)
 				for match in re.finditer(CRETerms, SSource):
 					SSource = re.sub(match.group(0), '<term>\g<0></term>', SSource)
-					print(match.group(0))
-				print(SSource + '\t', STarget)
+					# print(match.group(0))
+				# print(SSource + '\t', STarget)
 					
 				
 				
