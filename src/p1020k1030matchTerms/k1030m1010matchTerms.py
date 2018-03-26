@@ -70,7 +70,8 @@ class clMatchTerms(object):
 			if re.search(CRETerms, SSource):
 				# re.sub(CRETerms, <term>\0</term>, STextIn)
 				for match in re.finditer(CRETerms, SSource):
-					SSource = re.sub(match.group(1), '<term>\g<1></term>', SSource)
+					SMatch = match.group(1)
+					SSource = re.sub(SMatch, '<term>\g<1></term>', SSource)
 					print(match.group(1))
 				print(SSource + '\t', STarget)
 				print('')
