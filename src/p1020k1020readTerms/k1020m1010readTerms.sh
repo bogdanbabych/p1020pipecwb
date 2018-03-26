@@ -1,0 +1,1 @@
+python k1020m1010readTerms.py ../../../p1020d/dictionary.txt >../../../p1020d/k1020m1010readTerms-debug.txt
