@@ -93,7 +93,7 @@ class clMatchTerms(object):
 					iLong = 100 + i
 					SLong = str(iLong)
 					# SMatch = match.group(0)
-					SSource = re.sub('(?<= )' + match.group(0) + '(?=[ ,:;\?\.!])', '<term id=%(SLong)s>\g<0></term>', SSource) % locals()
+					SSource = re.sub('(?<= )' + match.group(0) + '(?=[ ,:;\?\.!])', '<term id=%s>\g<0></term>', SSource) % SLong
 					print(match.group(0))
 					# print(SMatch)
 				print(SSource + '\t', STarget)
