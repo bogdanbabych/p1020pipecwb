@@ -30,4 +30,7 @@ if __name__ == '__main__':
 	SReadTxtIn = pathlib.Path(sys.argv[1]).read_text()
 	SFNOut = m8510GenFileNames.clGenFineNames(sys.argv[1], ['.csv']).getData()[0]
 
-	print SFNOut
+	print(SFNOut)
+
+
+
