@@ -31,20 +31,34 @@ class clMatchTerms(object):
 		'''
 		one term per line format is converted into RE with disjunction
 		'''
-		LTerms = []
+		LTerms = []  # longer
+		# LTerms0 = [] # shorter
 		for STerm in STermsIn.splitlines():
 			STerm = STerm.rstrip()
 			STerm = re.sub('[\(\)]', ' ', STerm)
 			
 			if STerm == '': continue
-			STerm1 = ' (' + STerm + ')[ ,:;\?!]'
-			STerm2 = '^(' + STerm + ')[ ,:;\?!]'
-			STerm3 = ' (' + STerm + ')$'
-			STerm4 = '^(' + STerm + ')$'
+			
+			STerm1 = '(?<= )' + STerm + '(?=[ ,:;\?!])'
+			STerm2 = '^' + STerm + '(?=[ ,:;\?!])'
+			STerm3 = '(?<= )' + STerm + '$'
+			STerm4 = '^' + STerm + '$'
+			
+			
+			LTerms.append(STerm)
+			
+			
+			'''
+			STerm1 = ' ' + STerm + '[ ,:;\?!]'
+			STerm2 = '^' + STerm + '[ ,:;\?!]'
+			STerm3 = ' ' + STerm + '$'
+			STerm4 = '^' + STerm + '$'
 			LTerms.append(STerm1)
 			LTerms.append(STerm2)
 			LTerms.append(STerm3)
 			LTerms.append(STerm4)
+			'''
+			
 			
 		# create RE and compile it
 		RETerms = '|'.join(LTerms)
@@ -70,10 +84,10 @@ class clMatchTerms(object):
 			if re.search(CRETerms, SSource):
 				# re.sub(CRETerms, <term>\0</term>, STextIn)
 				for match in re.finditer(CRETerms, SSource):
-					SMatch = match.group(0)
-					# SSource = re.sub(SMatch, '<term>\g<0></term>', SSource)
-					# print(match.group(1))
-					print(SMatch)
+					# SMatch = match.group(0)
+					SSource = re.sub(match.group(0), '<term>\g<0></term>', SSource)
+					print(match.group(0))
+					# print(SMatch)
 				print(SSource + '\t', STarget)
 				print('')
 					
