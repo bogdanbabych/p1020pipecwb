@@ -47,7 +47,7 @@ class clMatchTerms(object):
 		print(LTermsNLenSorted)
 		
 		
-		for STerm, Len in STermsIn.splitlines():
+		for STerm in STermsIn.splitlines():
 			STerm = STerm.rstrip()
 			STerm = re.sub('[\(\)]', ' ', STerm)
 			
