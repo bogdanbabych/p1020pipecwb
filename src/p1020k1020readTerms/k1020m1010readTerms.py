@@ -19,7 +19,7 @@ class clGenFineNames(object):
 		for el in LFExtensionsOut:
 			SFNOut = SRoot + el
 			SDirFNOut = os.path.join(SHead, SFNOut)
-			self.LSFNOut.append(SDirFNOut)
+			self.LFNOut.append(SDirFNOut)
 		
 		return
 	
@@ -60,10 +60,10 @@ class clReadTermsFromText(object):
 		print selected column numbers
 		'''
 		FNOutput = open(SFNOutput, 'w')
-		for TColumns in LTTermNDefinition:
+		for TColumns in self.LTTermNDefinition:
 			LOut = []
 			for el in LColumnNumbers:
-				LOut.append(LTTermNDefinition[el])
+				LOut.append(TColumns[el])
 			SOut = '\t'.join(LOut)
 			FNOutput.write(SOut + '\n')
 		
