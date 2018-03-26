@@ -87,9 +87,13 @@ class clMatchTerms(object):
 			
 			if re.search(CRETerms, SSource):
 				# re.sub(CRETerms, <term>\0</term>, STextIn)
+				i = 0
 				for match in re.finditer(CRETerms, SSource):
+					i += 1
+					iLong = 100 + i
+					SLong = str(iLong)
 					# SMatch = match.group(0)
-					SSource = re.sub('(?<= )' + match.group(0) + '(?=[ ,:;\?\.!])', '<term>\g<0></term>', SSource)
+					SSource = re.sub('(?<= )' + match.group(0) + '(?=[ ,:;\?\.!])', '<term id=%(SLong)s>\g<0></term>', SSource) % locals()
 					print(match.group(0))
 					# print(SMatch)
 				print(SSource + '\t', STarget)
