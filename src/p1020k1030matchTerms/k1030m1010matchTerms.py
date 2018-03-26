@@ -16,21 +16,64 @@ class clMatchTerms(object):
 	'''
 
 
-	def __init__(self, STxtIn, RETermsIn):
+	def __init__(self, STermsIn, STextIn):
 		'''
 		matches RE of joined terms with the text string copied from TMX
 		'''
+		CRETerms = self.makeCREfromTerms(STermsIn)
+		self.matchNTagTerms(CRETerms, STextIn)
+		
+		
+		
 		return 
+
+	def makeCREfromTerms(self, STermsIn):
+		'''
+		one term per line format is converted into RE with disjunction
+		'''
+		LTerms = []
+		for STerm in STermsIn:
+			LTerms.append(STerm)
+			
+		# create RE and compile it
+		RETerms = '|'.join(LTerms)
+		CRETerms = re.compile(RETerms, re.I)
+		
+		return CRETerms
 	
+	def matchNTagTerms(self, CRETerms, STextIn):
+		'''
+		task: match, tag, write down into a separate file -- output of the annotation (only those lines where terms were matched)
+		'''
+		for SLine in STextIn:
+			LSFields = re.split('\t', SLine)
+			SSource = LSFields[0]
+			STarget = LSFields[1]
+			if re.search(CRETerms, SSource):
+				# re.sub(CRETerms, <term>\0</term>, STextIn)
+				for match in re.finditer(CRETerms, SSource):
+					SSource = re.sub(match.group(0), '<term>\g<0></term>', SSource)
+					print(match.group(1))
+				print(SSource + '\t', STarget)
+					
+				
+				
+		
 	
 
-	# end clMatchTerms class
+# end clMatchTerms class
+	
+	
+	
+	
 
 if __name__ == '__main__':
-	SReadTxtIn = pathlib.Path(sys.argv[1]).read_text()
-	SFNOut = m8510GenFileNames.clGenFineNames(sys.argv[1], ['.csv']).getData()[0]
+	STextIn = pathlib.Path(sys.argv[1]).read_text()
+	STermsIn = pathlib.Path(sys.argv[2]).read_text()
+	SFNOut = m8510GenFileNames.clGenFineNames(sys.argv[1], ['-terms.txt']).getData()[0]
 
-	print(SFNOut)
+	# print(SFNOut)
+	OMatchTerms = clMatchTerms(STermsIn, STextIn)
 
 
 
