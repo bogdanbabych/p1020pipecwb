@@ -51,7 +51,7 @@ class clReadTermsFromText(object):
 	def parseStringsTerms(self, SReadTxtIn):
 		
 		RECPattern = re.compile('^(.+?) — (.+)', re.M)
-		LTTermNDefinition = re.findall(RECPattern, SReadTxtIn, re.M)
+		LTTermNDefinition = re.findall(RECPattern, SReadTxtIn)
 				
 		return LTTermNDefinition
 	
