@@ -39,7 +39,7 @@ class clMatchTerms(object):
 			
 			if STerm == '': continue
 			
-			STerm1 = '(?<= )' + STerm + '(?=[ ,:;\?!])'
+			STerm1 = '(?<= )' + STerm + '(?=[ ,:;\?\.!])'
 			STerm2 = '^' + STerm + '(?=[ ,:;\?!])'
 			STerm3 = '(?<= )' + STerm + '$'
 			STerm4 = '^' + STerm + '$'
@@ -53,11 +53,11 @@ class clMatchTerms(object):
 			STerm2 = '^' + STerm + '[ ,:;\?!]'
 			STerm3 = ' ' + STerm + '$'
 			STerm4 = '^' + STerm + '$'
+			'''
 			LTerms.append(STerm1)
 			LTerms.append(STerm2)
 			LTerms.append(STerm3)
 			LTerms.append(STerm4)
-			'''
 			
 			
 		# create RE and compile it
