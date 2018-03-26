@@ -48,7 +48,7 @@ class clMatchTerms(object):
 			
 		# create RE and compile it
 		RETerms = '|'.join(LTerms)
-		# print(RETerms)
+		print(RETerms)
 		CRETerms = re.compile(RETerms, re.I)
 		
 		return CRETerms
@@ -70,7 +70,7 @@ class clMatchTerms(object):
 			if re.search(CRETerms, SSource):
 				# re.sub(CRETerms, <term>\0</term>, STextIn)
 				for match in re.finditer(CRETerms, SSource):
-					SMatch = match.group(1)
+					SMatch = match.group(0)
 					# SSource = re.sub(SMatch, '<term>\g<0></term>', SSource)
 					# print(match.group(1))
 					print(SMatch)
