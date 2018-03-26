@@ -58,7 +58,7 @@ class clMatchTerms(object):
 				# re.sub(CRETerms, <term>\0</term>, STextIn)
 				for match in re.finditer(CRETerms, SSource):
 					SSource = re.sub(match.group(0), '<term>\g<0></term>', SSource)
-					print(match.group(1))
+					print(match.group(0))
 				print(SSource + '\t', STarget)
 					
 				
