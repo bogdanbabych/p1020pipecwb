@@ -50,7 +50,7 @@ class clMatchTerms(object):
 		'''
 		task: match, tag, write down into a separate file -- output of the annotation (only those lines where terms were matched)
 		'''
-		for SLine in STextIn:
+		for SLine in STextIn.splitlines():
 			SLine = SLine.rstrip()
 			LSFields = re.split('\t', SLine)
 			try:
