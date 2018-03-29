@@ -8,6 +8,7 @@ import sys, os
 class clGenFineNames(object):
 	'''
 	generates file names from input file name pattern	
+	input = file name which is the main input; output = list of file names with extensions specified in the second argument
 	'''
 	
 	def __init__(self, SFNameTemplate = sys.argv[1], LFExtensionsOut= ['.out'] ):

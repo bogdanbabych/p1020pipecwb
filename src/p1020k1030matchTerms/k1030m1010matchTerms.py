@@ -68,8 +68,13 @@ class clMatchTerms(object):
 	def matchNTagTerms(self, CRETerms, STextIn):
 		'''
 		task: match, tag, write down into a separate file -- output of the annotation (only those lines where terms were matched)
+		the function is called to process all segments of the translation memory
 		'''
-		LMatchedTerms = []
+		# data structure for variable handling
+		LTSegsNTerms = [] # list of tuples: segments and terms: [ ( SSource, STarget, SSourceTagged, STargetTagged, LTTermsNTheirTranslCandidates ) ]
+		
+		
+		LMatchedTerms = [] # now used for counting 
 		ICountMatchSen = 0
 		for SLine in STextIn.splitlines():
 			SLine = SLine.rstrip()
@@ -102,6 +107,7 @@ class clMatchTerms(object):
 				print('')
 		ILenMatchedTerms = len(LMatchedTerms)
 		ILenMatchedUnique = len(set(LMatchedTerms))
+		# this is printing to debug; proper handling of the output in a variable
 		print('Terms:' + str(ILenMatchedTerms) + '\tUnique:' + str(ILenMatchedUnique))
 		print(set(LMatchedTerms))
 		
