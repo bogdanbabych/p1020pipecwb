@@ -107,7 +107,7 @@ class clMatchTerms(object):
 			STargetOri = STarget
 			if re.search(CRETerms, SSource):
 				ICountMatchSen += 1
-				if ICountMatchSen % 1000 == 0: sys.stderr.write(str(i) + '\n')
+				if ICountMatchSen % 500 == 0: sys.stderr.write(str(ICountMatchSen) + '\n')
 				# re.sub(CRETerms, <term>\0</term>, STextIn)
 				i = 0
 				for match in re.finditer(CRETerms, SSource):
