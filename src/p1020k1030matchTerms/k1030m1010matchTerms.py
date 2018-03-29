@@ -33,7 +33,7 @@ class clMatchTerms(object):
 		for (SSource, STarget, SSourceTag, STargetTag, LTTerms) in self.LTSegsNTerms:
 			FOutput.write(SSourceTag + '\t' + STargetTag + '\n')
 			for (STerm, LTermEquivalents) in LTTerms:
-				FOutput.write('\t' + STerm + '\t' + str(LTermEquivalents))
+				FOutput.write('\t' + STerm + '\t' + str(LTermEquivalents) + '\n')
 			
 			
 	
@@ -111,6 +111,7 @@ class clMatchTerms(object):
 				i = 0
 				for match in re.finditer(CRETerms, SSource):
 					i += 1
+					if i % 1000 == 0: sys.stderr.write(str(i) + '\n')
 					iLong = 100 + i
 					SLong = str(iLong)
 					# SMatch = match.group(0)
