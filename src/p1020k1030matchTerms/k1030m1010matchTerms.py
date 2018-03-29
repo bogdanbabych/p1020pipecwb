@@ -21,11 +21,21 @@ class clMatchTerms(object):
 		matches RE of joined terms with the text string copied from TMX
 		'''
 		CRETerms = self.makeCREfromTerms(STermsIn)
-		self.matchNTagTerms(CRETerms, STextIn)
-		
-		
-		
+		self.LTSegsNTerms = self.matchNTagTerms(CRETerms, STextIn)
 		return 
+	
+	def getData(self):
+		return self.LTSegsNTerms
+	
+	
+	def printData(self, SFOutput):
+		FOutput = open(SFOutput, 'w')
+		for (SSource, STarget, SSourceTag, STargetTag, LTTerms) in self.LTSegsNTerms:
+			FOutput.write(SSourceTag + '\t' + STargetTag + '\n')
+			for (STerm, LTermEquivalents) in LTTerms:
+				FOutput.write('\t' + STerm + '\t' + str(LTermEquivalents))
+			
+			
 	
 	def countWords(self, STerm):
 		LTerm = re.split(' ', STerm)
@@ -77,6 +87,9 @@ class clMatchTerms(object):
 		LMatchedTerms = [] # now used for counting 
 		ICountMatchSen = 0
 		for SLine in STextIn.splitlines():
+			# TSegsNTerms = ()
+			# LTTerms = terms which are used in this specific SLine (translation unit, or segment):
+			LTTerms = [] # list of tuples: [ (Term, [ (TransCandidate, Score), ... ] ), (Term, [ ...
 			SLine = SLine.rstrip()
 			LSFields = re.split('\t', SLine)
 			try:
@@ -90,6 +103,8 @@ class clMatchTerms(object):
 				STarget = ''
 				continue
 			
+			SSourceOri = SSource # saving a copy
+			STargetOri = STarget
 			if re.search(CRETerms, SSource):
 				ICountMatchSen += 1
 				# re.sub(CRETerms, <term>\0</term>, STextIn)
@@ -100,16 +115,23 @@ class clMatchTerms(object):
 					SLong = str(iLong)
 					# SMatch = match.group(0)
 					SSource = re.sub('(?<= )' + match.group(0) + '(?=[ ,:;\?\.!])', '<term id=%s>\g<0></term>' % SLong, SSource)
+					# updating the list of terms Translations are now represented by an empty list
+					LTTerms.append(( match.group(0), [] ))
 					print(match.group(0))
 					LMatchedTerms.append(match.group(0))
 					# print(SMatch)
 				print(str(ICountMatchSen) + '\t' + SSource + '\t', STarget)
 				print('')
+			# updating the main data structure: tuple for one translation unit / segment
+			TSegsNTerms = (SSourceOri, STargetOri, SSource, STarget, LTTerms)
+			LTSegsNTerms.append( TSegsNTerms )
 		ILenMatchedTerms = len(LMatchedTerms)
 		ILenMatchedUnique = len(set(LMatchedTerms))
 		# this is printing to debug; proper handling of the output in a variable
 		print('Terms:' + str(ILenMatchedTerms) + '\tUnique:' + str(ILenMatchedUnique))
 		print(set(LMatchedTerms))
+		
+		return LTSegsNTerms
 		
 					
 
@@ -127,6 +149,8 @@ if __name__ == '__main__':
 
 	# print(SFNOut)
 	OMatchTerms = clMatchTerms(STermsIn, STextIn)
+	LTSegsNTerms = OMatchTerms.getData()
+	OMatchTerms.printData(SFNOut)
 
 
 
