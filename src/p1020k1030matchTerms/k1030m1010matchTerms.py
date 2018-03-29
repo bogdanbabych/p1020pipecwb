@@ -107,11 +107,11 @@ class clMatchTerms(object):
 			STargetOri = STarget
 			if re.search(CRETerms, SSource):
 				ICountMatchSen += 1
+				if ICountMatchSen % 1000 == 0: sys.stderr.write(str(i) + '\n')
 				# re.sub(CRETerms, <term>\0</term>, STextIn)
 				i = 0
 				for match in re.finditer(CRETerms, SSource):
 					i += 1
-					if i % 1000 == 0: sys.stderr.write(str(i) + '\n')
 					iLong = 100 + i
 					SLong = str(iLong)
 					# SMatch = match.group(0)
@@ -146,7 +146,7 @@ if __name__ == '__main__':
 	STermsIn = pathlib.Path(sys.argv[1]).read_text()
 	STextIn = pathlib.Path(sys.argv[2]).read_text()
 
-	SFNOut = m8510GenFileNames.clGenFineNames(sys.argv[1], ['-terms.txt']).getData()[0]
+	SFNOut = m8510GenFileNames.clGenFineNames(sys.argv[2], ['-terms.txt']).getData()[0]
 
 	# print(SFNOut)
 	OMatchTerms = clMatchTerms(STermsIn, STextIn)
