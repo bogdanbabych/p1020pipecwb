@@ -242,7 +242,7 @@ class clGraphonolev(object):
 
 		
 		# return (Levenshtein0, Levenshtein1, Levenshtein0Norm, Levenshtein1Norm)
-		return (Levenshtein0, evenshtein0Norm, LevenshteinI2, LevenshteinI2Norm, LevenshteinI4, LevenshteinI4Norm, LevenshteinI6, LevenshteinI6Norm, LevenshteinI8, LevenshteinI8Norm, Levenshtein1, LLevenshtein1Norm)
+		return (Levenshtein0, Levenshtein0Norm, LevenshteinI2, LevenshteinI2Norm, LevenshteinI4, LevenshteinI4Norm, LevenshteinI6, LevenshteinI6Norm, LevenshteinI8, LevenshteinI8Norm, Levenshtein1, Levenshtein1Norm)
 
 
 	def printMatrix(self, m):
