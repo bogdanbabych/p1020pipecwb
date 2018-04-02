@@ -331,9 +331,12 @@ if __name__ == '__main__':
 		
 	# for testing purposes: argv: use comma for joining file names, not ; --> does not work correctly
 	# print(FInput, SLangID1, SLangID2, SDebug, STransliterationTable, SFeatureTables)
+	
+	# list comprehension
+	# list of objects with different feature tables
+	LOGraphonolev = [ clGraphonolev(BDebug, TransliterationTable = STransliterationTable, FeatueTable = el) for el in  LFeatureTables ]
 		
-		
-	OGraphonolev = clGraphonolev(BDebug, TransliterationTable = STransliterationTable, FeatueTable = LFeatureTables[0])
+	# OGraphonolev = clGraphonolev(BDebug, TransliterationTable = STransliterationTable, FeatueTable = LFeatureTables[0])
 	# OGraphonolev.readFeat()
 	for SLine in FInput:
 		SLine = SLine.rstrip()
@@ -347,5 +350,9 @@ if __name__ == '__main__':
 		# LGraphFeat1 = OGraphonolev.str2Features(SW1, SLangID1)
 		# FDebug.write('SW2 = %(SW2)s; SLangID2 = %(SLangID2)s\n' % locals())
 		# LGraphFeat2 = OGraphonolev.str2Features(SW2, SLangID2)
-		(Lev0, Lev0Norm, LevenshteinI2, LevenshteinI2Norm, LevenshteinI4, LevenshteinI4Norm, LevenshteinI6, LevenshteinI6Norm, LevenshteinI8, LevenshteinI8Norm, Lev1, Lev1Norm) = OGraphonolev.computeLevenshtein(SW1, SW2, SLangID1, SLangID2)
-		sys.stdout.write('%(SW1)s, %(SW2)s, %(Lev0)d, %(Lev0Norm).4f, %(LevenshteinI2).4f, %(LevenshteinI2Norm).4f, %(LevenshteinI4).4f, %(LevenshteinI4Norm).4f, %(LevenshteinI6).4f, %(LevenshteinI6Norm).4f, %(LevenshteinI8).4f, %(LevenshteinI8Norm).4f, %(Lev1).4f, %(Lev1Norm).4f\n' % locals())
+		
+		# produce for each of the feature tables, the order is determined by the order of feature tables
+		for OGraphonolev in LOGraphonolev:
+			(Lev0, Lev0Norm, LevenshteinI2, LevenshteinI2Norm, LevenshteinI4, LevenshteinI4Norm, LevenshteinI6, LevenshteinI6Norm, LevenshteinI8, LevenshteinI8Norm, Lev1, Lev1Norm) = OGraphonolev.computeLevenshtein(SW1, SW2, SLangID1, SLangID2)
+			sys.stdout.write('%(SW1)s, %(SW2)s, %(Lev0)d, %(Lev0Norm).4f, %(LevenshteinI2).4f, %(LevenshteinI2Norm).4f, %(LevenshteinI4).4f, %(LevenshteinI4Norm).4f, %(LevenshteinI6).4f, %(LevenshteinI6Norm).4f, %(LevenshteinI8).4f, %(LevenshteinI8Norm).4f, %(Lev1).4f, %(Lev1Norm).4f\n' % locals())
+		sys.stdout.write('\n')
