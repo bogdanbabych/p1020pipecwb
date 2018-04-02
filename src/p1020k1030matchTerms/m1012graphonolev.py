@@ -159,10 +159,13 @@ class clGraphonolev(object):
 		if self.DTransliterationTable:
 			self.FDebug.write(SW1 + '\t')
 			self.FDebug.write(SW2 + '\n')
-			SW1 = self.RECTransliterationTable.sub(lambda mo: self.DTransliterationTable[mo.string[mo.start():mo.end()]], SW1)
-			SW2 = self.RECTransliterationTable.sub(lambda mo: self.DTransliterationTable[mo.string[mo.start():mo.end()]], SW2)
-			self.FDebug.write(SW1 + '\t')
-			self.FDebug.write(SW2 + '\n')
+			# transliterated versions
+			SW1tl = self.RECTransliterationTable.sub(lambda mo: self.DTransliterationTable[mo.string[mo.start():mo.end()]], SW1)
+			SW2tl = self.RECTransliterationTable.sub(lambda mo: self.DTransliterationTable[mo.string[mo.start():mo.end()]], SW2)
+			self.FDebug.write(SW1tl + '\t')
+			self.FDebug.write(SW2tl + '\n')
+			s1tl = self.str2Features(SW1tl, SLangID2) # SLangID1 -- removed; not original language, but the target language, into which translit happened
+			s2tl = self.str2Features(SW2tl, SLangID2)
 			
 		s1 = self.str2Features(SW1, SLangID1)
 		s2 = self.str2Features(SW2, SLangID2)
@@ -209,6 +212,10 @@ class clGraphonolev(object):
 				# print(str(s1[sz]) + '\t' + str(s2[zz]))
 				(ch1, LFeat1) = s1[sz]
 				(ch2, LFeat2) = s2[zz]
+				if self.DTransliterationTable:
+					(ch1tl, LFeat1tl) = s1tl[sz]
+					(ch2tl, LFeat2tl) = s2tl[zz]
+					
 				# FMeasure = self.compareGraphFeat(s1[sz], s2[zz])
 				FMeasure = self.compareGraphFeat(LFeat1, LFeat2)
 				OneMinusFMeasure = 1 - FMeasure
@@ -227,6 +234,10 @@ class clGraphonolev(object):
 
 				# now classical levenshtein distance
 				# if s1[sz] == s2[zz]:
+				# in case transliteration table is on -- do this only for direct lev, not for featurised...
+				if self.DTransliterationTable:
+					ch1 = ch1tl
+					ch2 = ch2tl
 				if ch1 == ch2:
 					matrix0[zz+1][sz+1] = min(matrix0[zz+1][sz] + 1, matrix0[zz][sz+1] + 1, matrix0[zz][sz])
 				else:
