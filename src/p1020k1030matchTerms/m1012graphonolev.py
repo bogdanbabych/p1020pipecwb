@@ -155,6 +155,15 @@ class clGraphonolev(object):
 		''' 
 		converts character string to two lists of two two tuples : (character , phonological feature list)
 		'''
+		
+		if self.DTransliterationTable:
+			self.FDebug.write(SW1 + '\t')
+			self.FDebug.write(SW2 + '\n')
+			SW1 = self.RECTransliterationTable.sub(lambda mo: self.DTransliterationTable[mo.string[mo.start():mo.end()]], SW1)
+			SW2 = self.RECTransliterationTable.sub(lambda mo: self.DTransliterationTable[mo.string[mo.start():mo.end()]], SW2)
+			self.FDebug.write(SW1 + '\t')
+			self.FDebug.write(SW2 + '\n')
+			
 		s1 = self.str2Features(SW1, SLangID1)
 		s2 = self.str2Features(SW2, SLangID2)
 		l1 = len(s1)
