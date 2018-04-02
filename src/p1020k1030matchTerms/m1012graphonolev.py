@@ -24,6 +24,9 @@ import copy
 from collections import defaultdict
 from collections import Counter
 
+import pathlib
+import string
+
 
 
 
@@ -34,24 +37,50 @@ class clGraphonolev(object):
 	'''
 
 
-	def __init__(self, Debug = False, DebugFile = 'md060graphonolev-debug.txt', DebugMode = 'a', SFeatueTable = 'm1012graphonolev-phonetic-features.tsv'):
+	def __init__(self, Debug = False, DebugFile = 'md060graphonolev-debug.txt', DebugMode = 'a', TransliterationTable = False, FeatueTable = 'm1012graphonolev-phonetic-features.tsv'):
 		'''
 		Constructor
 		'''
 		# self.DFeatures = {}
-		self.readFeat(SFeatueTable)
+		self.readFeat(FeatueTable)
 		self.BDebug = False
 		if Debug == True:
 			self.BDebug = True
 			self.FDebug = open(DebugFile, DebugMode)
+			
+		if TransliterationTable:
+			self.readTranslit(TransliterationTable)
+			
+		return
+			
+	def readTranslit(self, TransliterationTable):
+		self.DTransliterationTable = defaultdict(str)
+		STextTransliterationTable = pathlib.Path(TransliterationTable).read_text()
+		for SLine in STextTransliterationTable.splitlines():
+			if re.match('#', SLine): continue
+			
+			SLine = SLine.rstrip()
+			if SLine == '' : continue
+
+			LLine = re.split('\t', SLine)
+			
+			try:
+				[key, val] = LLine
+			except:
+				continue
+			self.DTransliterationTable[key] = val
+			# Create a regular expression  from the dictionary keys
+			self.RECTransliterationTable = re.compile("(%s)" % "|".join(map(re.escape, self.DTransliterationTable.keys())))			
+			
+		return
 
 		
-	def readFeat(self, SFeatueTable):
+	def readFeat(self, FeatueTable):
 		'''
 		reading a table of phonological features for each letter, only needed for feature-based levenstein distance calculations
 		'''
 		self.DGraphemes = defaultdict(list) # the main dictionary of the project: mapping: grapheme, language --> feature sets		
-		FFeatures = open(SFeatueTable, 'rU')
+		FFeatures = open(FeatueTable, 'rU')
 		for SLine in FFeatures:
 			if re.match('#', SLine):
 				continue
@@ -279,9 +308,7 @@ if __name__ == '__main__':
 	# print(FInput, SLangID1, SLangID2, SDebug, STransliterationTable, SFeatureTables)
 		
 		
-	
-	
-	OGraphonolev = clGraphonolev(BDebug, SFeatueTable = LFeatureTables[0])
+	OGraphonolev = clGraphonolev(BDebug, TransliterationTable = STransliterationTable, FeatueTable = LFeatureTables[0])
 	# OGraphonolev.readFeat()
 	for SLine in FInput:
 		SLine = SLine.rstrip()
@@ -295,6 +322,6 @@ if __name__ == '__main__':
 		# LGraphFeat2 = OGraphonolev.str2Features(SW2, SLangID2)
 		(Lev0, Lev0Norm, LevenshteinI2, LevenshteinI2Norm, LevenshteinI4, LevenshteinI4Norm, LevenshteinI6, LevenshteinI6Norm, LevenshteinI8, LevenshteinI8Norm, Lev1, Lev1Norm) = OGraphonolev.computeLevenshtein(SW1, SW2, SLangID1, SLangID2)
 		sys.stdout.write('%(SW1)s, %(SW2)s, %(Lev0)d, %(Lev0Norm).4f, %(LevenshteinI2).4f, %(LevenshteinI2Norm).4f, %(LevenshteinI4).4f, %(LevenshteinI4Norm).4f, %(LevenshteinI6).4f, %(LevenshteinI6Norm).4f, %(LevenshteinI8).4f, %(LevenshteinI8Norm).4f, %(Lev1).4f, %(Lev1Norm).4f\n' % locals())
-			
+
 		
 		
