@@ -34,24 +34,24 @@ class clGraphonolev(object):
 	'''
 
 
-	def __init__(self, Debug = False, DebugFile = 'md060graphonolev-debug.txt', DebugMode = 'a'):
+	def __init__(self, Debug = False, DebugFile = 'md060graphonolev-debug.txt', DebugMode = 'a', SFeatueTable = 'md060graphonoLev-phonetic-features.tsv'):
 		'''
 		Constructor
 		'''
 		# self.DFeatures = {}
-		self.readFeat()
+		self.readFeat(SFeatueTable)
 		self.BDebug = False
 		if Debug == True:
 			self.BDebug = True
 			self.FDebug = open(DebugFile, DebugMode)
 
 		
-	def readFeat(self):
+	def readFeat(self, SFeatueTable):
 		'''
 		reading a table of phonological features for each letter, only needed for feature-based levenstein distance calculations
 		'''
 		self.DGraphemes = defaultdict(list) # the main dictionary of the project: mapping: grapheme, language --> feature sets		
-		FFeatures = open('md060graphonoLev-phonetic-features.tsv', 'rU')
+		FFeatures = open(SFeatueTable, 'rU')
 		for SLine in FFeatures:
 			if re.match('#', SLine):
 				continue
@@ -267,19 +267,21 @@ if __name__ == '__main__':
 	SDebug = sys.argv[4]
 	STransliterationTable = sys.argv[5]
 	SFeatureTables = sys.argv[6]
+	LFeatureTables = re.split(',', SFeatureTables)
+	# list of features tables files
 	
 	if SDebug == 'Debug':
 		BDebug = True
 	else:
 		BDebug = False
 		
-		
-	print(FInput, SLangID1, SLangID2, SDebug, STransliterationTable, SFeatureTables)
+	# for testing purposes: argv: use comma for joining file names, not ; --> does not work correctly
+	# print(FInput, SLangID1, SLangID2, SDebug, STransliterationTable, SFeatureTables)
 		
 		
 	
 	
-	OGraphonolev = clGraphonolev(BDebug)
+	OGraphonolev = clGraphonolev(BDebug, SFeatueTable = LFeatureTables[0])
 	# OGraphonolev.readFeat()
 	for SLine in FInput:
 		SLine = SLine.rstrip()
