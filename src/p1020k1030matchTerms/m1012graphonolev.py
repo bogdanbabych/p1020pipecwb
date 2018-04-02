@@ -48,7 +48,8 @@ class clGraphonolev(object):
 		if Debug == True:
 			self.BDebug = True
 			self.FDebug = open(DebugFile, DebugMode)
-			
+		
+		self.DTransliterationTable = None # default value changed if there is a successful transliteration table 
 		if TransliterationTable != 'None':
 			self.readTranslit(TransliterationTable)
 			
@@ -71,7 +72,10 @@ class clGraphonolev(object):
 				continue
 			self.DTransliterationTable[key] = val
 			# Create a regular expression  from the dictionary keys
-			self.RECTransliterationTable = re.compile("(%s)" % "|".join(map(re.escape, self.DTransliterationTable.keys())))			
+			self.RECTransliterationTable = re.compile("(%s)" % "|".join(map(re.escape, self.DTransliterationTable.keys())))
+			
+			if len(self.DTransliterationTable.items()) == 0:
+				self.DTransliterationTable = None
 			
 		return
 
