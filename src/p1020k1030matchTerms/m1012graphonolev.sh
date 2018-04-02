@@ -1,2 +1,2 @@
 # transliteration argument is set to False
-python m1012graphonolev.py md060graphonoLev-in.txt ua ru Debug False md060graphonoLev-phonetic-features.tsv,md060graphonoLev-phonetic-featuresORI.tsv  >m1012graphonolev-out.txt
+python m1012graphonolev.py m1012graphonolev-in.txt ua ru Debug False md060graphonoLev-phonetic-features.tsv,md060graphonoLev-phonetic-featuresORI.tsv  >m1012graphonolev-out.txt
