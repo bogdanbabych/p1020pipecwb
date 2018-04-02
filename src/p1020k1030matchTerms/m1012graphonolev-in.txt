@@ -99,7 +99,3 @@ tactics	тактиці
 techniques	технічним
 techniques	техніки
 virus	віруси
-
-
-
-
