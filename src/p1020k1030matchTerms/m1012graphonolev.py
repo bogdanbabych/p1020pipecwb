@@ -7,6 +7,7 @@ core improvements:
 - introduction of a transliteration table
 - changing the order or returned arguments (first four, to be more consistent with the rest (normalised version always follows the raw version)
 - use different tables of feature sets, returning as an argument from the core class -- feature sets are variables now
+- transliteration table is within the class, can be used in combination with feature mapping
 
 No optimization for speed yet...
 
