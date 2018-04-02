@@ -258,18 +258,25 @@ class clGraphonolev(object):
 
 # using the class: initialising and computing Lev distances
 if __name__ == '__main__':
+	for el in sys.argv:
+		sys.stderr.write(el + '\n')
+
 	FInput = open(sys.argv[1], 'rU')
 	SLangID1 = sys.argv[2]
 	SLangID2 = sys.argv[3]
 	SDebug = sys.argv[4]
+	STransliterationTable = sys.argv[5]
+	SFeatureTables = sys.argv[6]
+	
 	if SDebug == 'Debug':
 		BDebug = True
 	else:
 		BDebug = False
 		
 		
-	for el in sys.argv:
-		sys.stderr.write(el + '\n')
+	print(FInput, SLangID1, SLangID2, SDebug, STransliterationTable, SFeatureTables)
+		
+		
 	
 	
 	OGraphonolev = clGraphonolev(BDebug)
