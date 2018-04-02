@@ -21,6 +21,12 @@ To develop an argument:
 	
 	- transliteration task;
 	
+
+-- further development steps
+	>> mappings with multicharacter features for transliteration + 
+	dygraphs, etc. >> planning dygraph feature structures and mapping 
+	>> experimental set with cognate identification...
+	
 	
 	
 	
