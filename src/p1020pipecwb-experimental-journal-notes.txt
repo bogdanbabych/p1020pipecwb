@@ -1,0 +1,26 @@
+integrating of a transliteration function
+	--> lev distance by default based on a transliteration, or on the feature space ....
+	--> both?
+		>> compare approaches
+		>> initial seed lexicon for sentence alignment ... 
+		>> getting via initial alignment / translit non available
+		>> suitable for surprise under-resource languages...
+
+02/04/2018
+		
+using an updated graphonolev module
+	further -- test suites, optimisation for speed, regression testing
+	
+making the case -- English set: distant languages / cognates...
+
+
+top priority -- integrate a transliteration table... >> 
+
+To develop an argument:
+	"interlingua" of feature mapping vs. direct transfer...
+	
+	- transliteration task;
+	
+	
+	
+	

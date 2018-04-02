@@ -1,0 +1,122 @@
+
+experiment:
+
+
+
+
+1. evaluation framework
+	- replicating results; improvement;
+	- determining feature configuration
+	- determining insertion weight;
+	- comparison with baseline Levenshtein
+
+
+2. response to improvements >> what to do...
+	>> future work
+
+3. Sharoff: cognate identification application
+	- cognates :: vs. other tasks;
+		= 
+
+
+
+	[ніхто крім нас не зробить цю роботу...]
+	[knowing and understanding... ] == Feynman
+		https://www.youtube.com/watch?v=NM-zWTU7X-k
+	[passion about research ... >> 'passionate minds' book -- Bodanis... ]
+
+	calculate different measures of distance in the evaluation set;
+		>> do we need a threshold >> establishing experimentally the threshold; 
+			>> what is a cognate: definition >> technical?
+			>> distribution of distances ???
+			>> non-cognates vs. cognates :: standard Lev? 
+
+			>> two-dip?
+
+
+		>> distractors and success ... >> distractors for cognates; success depends how many / how close they are...
+
+
+
+
+4. to get only those which are in the reference set ... 
+	>> really small evaluation set :: intersection of the two sets:
+	// three: Ukrainian on the Uk side; Russian on the Ru side, 
+	// start with dictionary ?
+
+
+
+5. in future -- developing resource structure :: for Ukrainian and other languages... 
+
+
+
+Items:4658
+PoS:4674
+Multi-PoS:16
+InterjectionsPronouns-PoS:12
+
+
+--> further notes for the journal publication...
+	>> 
+
+
+Following
+  User Actions
+ Mikel Forcada @MikelForcada
+Catedràtic de Lleng. i Sist. Informàt. a la Univ. d'Alacant / Prof. of Computer Eng. at the Univ. d'Alacant. Secr. de Form. d'@esquerrapv. Pres. https://t.co/YYulFDUyUS
+
+ Follow
+  User Actions
+ unhammer @unhammer
+50D4 8796 0B86 3F05 4B6A 12F9 7426 06DE 766A C60C
+
+ Follow
+  User Actions
+ K Vashee @kvashee
+Translation Technology, Machine Intelligence, AR, Global Collaboration, Dreamer, Music as meditation. Wonder and awe
+
+ Follow
+  User Actions
+ Xavi Ivars @xavivars
+Enginyer en Informàtica. Valencià. Visc a Barcelona. Aficionat a la lingüística i defensor de la meua. Músic frustrat. Usuari i divulgador de programari lliure.
+
+ Follow
+  User Actions
+ Andy Way @tarfandy
+Deputy Director @adaptcentre Professor School of Computing @dublincityuni COYB @chelseafc All views my own etc. EAMT 2017: https://t.co/Orf4CffqSS
+
+ Follow
+  User Actions
+ Núria Bel @BelNuria
+
+Following
+  User Actions
+ Prompsit @Prompsit
+Simplificamos la gestión de tus proyectos en varios idiomas con herramientas de traducción, lingüísticas y de edición, como las de http://t.co/TLw8ZRIxvO
+
+Following
+  User Actions
+ Qun Liu @LiuQunMTtoDeath
+Professor at ADAPT Centre, School of Computing, Dublin City University & Research Professor at Institute of Computing Technology, Chinese Academy of Sciences
+
+ Follow
+  User Actions
+ Niklas Laxström @nikerabbit
+
+ Follow
+  User Actions
+ Teresa Lynn @cigilt
+Irish language technologist, computational linguist, Postdoc researcher (DCU), semi-gaeilgeoir, semi-aussie, suffering from wanderlust, Irish Fulbright Scholar
+ Bogdan Babych @b_babych
+Associate Professor in Translation Studies, University of Leeds. Research Interests: Machine Translation, Ukrainian Linguistics. Politics tweets @bogdan_babych
+
+ Follow
+  User Actions
+ Henry Liu @interpretaatioo
+Interpreter, Translator, Orator, Thinker, Networker, Advocate of the profession, President of International Federation of Translators FIT, Tanguero, Opera lover
+
+ Follow
+  User Actions
+ Didier Briel @DidierBriel
+English to French translator and consultant. #OmegaT project manager.
+

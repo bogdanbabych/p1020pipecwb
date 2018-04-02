@@ -1,0 +1,1 @@
+python3 md060graphonoLevV09.py md060graphonoLev-in.txt ua ru Debug >md060graphonoLevV09-out.txt

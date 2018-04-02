@@ -1,0 +1,62 @@
+5a6
+> v09: returning different insertion costs for graphonological distance
+24c25
+< 	def __init__(self, Debug = False):
+---
+> 	def __init__(self, Debug = False, DebugFile = 'md060graphonolev-debug.txt', DebugMode = 'a'):
+33c34
+< 			self.FDebug = open('md060graphonolev-debug.txt', 'a')
+---
+> 			self.FDebug = open(DebugFile, DebugMode)
+134a136,140
+> 		matrixI2 = copy.deepcopy(matrix)
+> 		matrixI4 = copy.deepcopy(matrix)
+> 		matrixI6 = copy.deepcopy(matrix)
+> 		matrixI8 = copy.deepcopy(matrix)
+> 		# different insertion costs
+137a144,148
+> 			matrixI2[zz] = copy.deepcopy(matrix[zz])
+> 			matrixI4[zz] = copy.deepcopy(matrix[zz])
+> 			matrixI6[zz] = copy.deepcopy(matrix[zz])
+> 			matrixI8[zz] = copy.deepcopy(matrix[zz])
+> 			
+152c163,164
+< 				# Main work is here:
+---
+> 				
+> 				# Main work is here: # experimental question: 
+153a166,171
+> 				matrixI2[zz+1][sz+1] = min(matrixI2[zz+1][sz] + 0.2, matrixI2[zz][sz+1] + 0.2, matrixI2[zz][sz] + OneMinusFMeasure)
+> 				matrixI4[zz+1][sz+1] = min(matrixI4[zz+1][sz] + 0.4, matrixI4[zz][sz+1] + 0.4, matrixI4[zz][sz] + OneMinusFMeasure)
+> 				matrixI6[zz+1][sz+1] = min(matrixI6[zz+1][sz] + 0.6, matrixI6[zz][sz+1] + 0.6, matrixI6[zz][sz] + OneMinusFMeasure)
+> 				matrixI8[zz+1][sz+1] = min(matrixI8[zz+1][sz] + 0.8, matrixI8[zz][sz+1] + 0.8, matrixI8[zz][sz] + OneMinusFMeasure)
+> 				# matrix[zz+1][sz+1] = min(matrix[zz+1][sz] + 0.4, matrix[zz][sz+1] + 0.4, matrix[zz][sz] + OneMinusFMeasure)
+> 				# insertion cost adjustment -- revert to 1 or lowering to 0.4 ?
+165a184,187
+> 		LevenshteinI2 =  matrixI2[l2][l1]
+> 		LevenshteinI4 =  matrixI4[l2][l1]
+> 		LevenshteinI6 =  matrixI6[l2][l1]
+> 		LevenshteinI8 =  matrixI8[l2][l1]
+178a201,205
+> 			LevenshteinI2Norm = LevenshteinI2 / lAve
+> 			LevenshteinI4Norm = LevenshteinI4 / lAve
+> 			LevenshteinI6Norm = LevenshteinI6 / lAve
+> 			LevenshteinI8Norm = LevenshteinI8 / lAve
+> 			
+180a208,212
+> 			LevenshteinI2Norm = 1
+> 			LevenshteinI4Norm = 1
+> 			LevenshteinI6Norm = 1
+> 			LevenshteinI8Norm = 1
+> 
+200c232,233
+< 		return (Levenshtein0, Levenshtein1, Levenshtein0Norm, Levenshtein1Norm)
+---
+> 		# return (Levenshtein0, Levenshtein1, Levenshtein0Norm, Levenshtein1Norm)
+> 		return (Levenshtein0, Levenshtein1, Levenshtein0Norm, Levenshtein1Norm, LevenshteinI2, LevenshteinI2Norm, LevenshteinI4, LevenshteinI4Norm, LevenshteinI6, LevenshteinI6Norm, LevenshteinI8, LevenshteinI8Norm)
+237,238c270,271
+< 		(Lev0, Lev1, Lev0Norm, Lev1Norm) = OGraphonolev.computeLevenshtein(SW1, SW2, SLangID1, SLangID2)
+< 		sys.stdout.write('%(SW1)s, %(SW2)s, %(Lev0)d, %(Lev1).4f, %(Lev0Norm).4f, %(Lev1Norm).4f\n' % locals())
+---
+> 		(Lev0, Lev1, Lev0Norm, Lev1Norm, LevenshteinI2, LevenshteinI2Norm, LevenshteinI4, LevenshteinI4Norm, LevenshteinI6, LevenshteinI6Norm, LevenshteinI8, LevenshteinI8Norm) = OGraphonolev.computeLevenshtein(SW1, SW2, SLangID1, SLangID2)
+> 		sys.stdout.write('%(SW1)s, %(SW2)s, %(Lev0)d, %(Lev1).4f, %(Lev0Norm).4f, %(Lev1Norm).4f, %(LevenshteinI2).4f, %(LevenshteinI2Norm).4f, %(LevenshteinI4).4f, %(LevenshteinI4Norm).4f, %(LevenshteinI6).4f, %(LevenshteinI6Norm).4f, %(LevenshteinI8).4f, %(LevenshteinI8Norm).4f\n' % locals())
