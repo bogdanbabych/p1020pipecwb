@@ -48,7 +48,7 @@ class clGraphonolev(object):
 			self.BDebug = True
 			self.FDebug = open(DebugFile, DebugMode)
 			
-		if TransliterationTable:
+		if TransliterationTable != 'None':
 			self.readTranslit(TransliterationTable)
 			
 		return
