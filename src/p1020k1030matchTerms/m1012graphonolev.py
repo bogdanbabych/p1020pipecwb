@@ -78,7 +78,7 @@ class clGraphonolev(object):
 		
 	def readFeat(self, FeatueTable):
 		'''
-		reading a table of phonological features for each letter, only needed for feature-based levenstein distance calculations
+		reading a table of phonological features for each letter, only needed for feature-based levenshtein distance calculations
 		'''
 		self.DGraphemes = defaultdict(list) # the main dictionary of the project: mapping: grapheme, language --> feature sets		
 		FFeatures = open(FeatueTable, 'rU')
@@ -314,7 +314,9 @@ if __name__ == '__main__':
 	for SLine in FInput:
 		SLine = SLine.rstrip()
 		try:
-			(SW1, SW2) = re.split('\t', SLine, 1)
+			(SW1, SW2) = re.split('\t', SLine, 1) # lowercase -- external command?
+			SW1 = SW1.lower()
+			SW2 = SW2.lower()
 		except:
 			SW1 = '' ; SW2 = ''
 		# FDebug.write('SW1 = %(SW1)s; SLangID1 = %(SLangID1)s\n' % locals())
