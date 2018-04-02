@@ -267,6 +267,11 @@ if __name__ == '__main__':
 	else:
 		BDebug = False
 		
+		
+	for el in sys.argv:
+		sys.stderr.write(el + '\n')
+	
+	
 	OGraphonolev = clGraphonolev(BDebug)
 	# OGraphonolev.readFeat()
 	for SLine in FInput:
